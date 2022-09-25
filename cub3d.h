@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/09/25 11:02:10 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/09/25 13:59:27 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ typedef struct  s_image {
 	int		line_length;
 	int		endian;
 }	t_image;
+
+typedef struct s_data
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_image	img;
+}	t_data;
 
 typedef struct s_vector
 {

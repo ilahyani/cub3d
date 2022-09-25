@@ -20,14 +20,14 @@ CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIB) $(HEADER) 
+$(NAME): $(OBJS) $(LIB) $(MLX) $(HEADER) 
 	$(CC) $(CFLAGS) $(LIB) $(MLX) $(OBJS) -lm -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 $(LIB):
-	@make -C libft
+	make -C ./libft
 
 $(MLX):
-	@make -C minilibx
+	make -C ./minilibx
 
 %.o: %.c	$(HEADER)
 			$(CC) $(CFLAGS) -c $< -o $@
