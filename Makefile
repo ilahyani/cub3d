@@ -6,7 +6,7 @@
 #    By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 17:52:47 by snouae            #+#    #+#              #
-#    Updated: 2022/10/21 11:57:05 by ilahyani         ###   ########.fr        #
+#    Updated: 2022/10/21 12:25:06 by ilahyani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,22 +32,28 @@ OBJ= $(SRC:.c=.o)
 
 NAME = cub3d
 
-MLX = minilibx/libmlx.a
+LIB = ./minilibx/libmlx.a
 
 all : $(NAME)
 
-$(NAME) : $(OBJ)
-	@$(CC) $(FLAGS) $(OBJ) $(MLXFLAGS) $(MLX) -o $(NAME)
+$(LIB):
+	@make -C minilibx
+
+$(NAME) : $(OBJ) $(LIB)
+	@$(CC) $(FLAGS) $(OBJ) $(MLXFLAGS) $(LIB) -o $(NAME)
 
 %.o : %.c cub3d.h
 	@$(CC) $(FLAGS) -c $< -o $@
 
-clean:
-	$(RM) $(OBJ)
+clean_lib:
+	@make clean -C minilibx
+
+clean: clean_lib
+	$(RM) $(OBJ) $(LIB)
 
 fclean: clean
 	@$(RM) $(NAME)
 
-re : fclean all
+re: fclean all
 
 .PHONY:all clean fclean re
