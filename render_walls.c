@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:54:19 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/21 12:01:37 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:10:31 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void render3d(t_map *map, int num_rays)
             //printf("the height is %f\n", distanceprojectplane);
             //float h = (TILESIZE / rayDistance) * distanceprojectplane;
              double h = ((double)TILESIZE / distance) * distanceprojectplane;
+			if(h > HEIGHT)
+			 	h = HEIGHT;
              double i1 = ((HEIGHT / 2) - (h / 2));
              double down = h  + i1;
 			double up = i1;
