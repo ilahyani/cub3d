@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/20 18:34:49 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/21 12:00:59 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,47 +145,7 @@ t_pos	get_shortest_dist(t_map *map, t_pos h_pos, t_pos v_pos);
 void	drawline(t_map *map, double x0, double y0, double x1, double y1);
 void	ft_inti_angl_player(t_map *map);
 void	draw_cub(t_map *map, int i, int j, int color);
+void	render3d(t_map *map, int num_rays);
+void	ft_ix(t_map *map);
 
 #endif
-
-/*
-double xstep, ystep; 
-    double xintercept, yintercept;
-    int checkwall = 0;
-    double wallhitx = 0;
-    double wallhity = 0;
-    double wx;
-    double wy;
-    /////////////////horisontaln part
-    yintercept = floor(map->py / TILESIZE) * TILESIZE;
-    if(map->isRaydown)
-        yintercept += TILESIZE;
-    xintercept = map->px + (yintercept - map->py) / tan(rayAngale);
-    ystep = TILESIZE;
-    if(map->isRayup)
-        ystep *= -1;
-    xstep = TILESIZE / tan(rayAngale);
-    if(map->isRayleft && xstep > 0)
-        xstep *= -1;
-    if(map->isRayright && xstep < 0)
-        xstep *= -1;
-    int nexthorzx = xintercept;
-    int nexthorzy = yintercept;
-    if(map->isRayup)
-        nexthorzy--;
-    while(nexthorzx >= 0 && nexthorzx <= map->big_width * TILESIZE && nexthorzy >= 0 
-    && nexthorzy <= (map->rows) * TILESIZE)
-    {
-        if(map->m[(int)nexthorzy / TILESIZE + map->top][(int)nexthorzx / TILESIZE] != '0')
-        {
-            checkwall = 1;
-            wallhitx = nexthorzx;
-            wallhity = nexthorzy;
-            break;
-        }else
-        {
-            nexthorzx += xstep;
-            nexthorzy += ystep;
-        }
-    }
-*/
