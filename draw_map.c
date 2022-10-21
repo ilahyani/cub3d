@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:57:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/19 20:05:09 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/20 18:35:46 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void	ft_pixel(t_map *map)
 int check_deal_key(int key, t_map *map)
 {
 	//printf("the key is %d\n", key);
+	if (key == 53)
+		destroy_notif();
 	if(key == W)
 		map->key_w = 1;
 	else if(key == S)
@@ -131,8 +133,6 @@ int keyrealeased(int key, t_map *map)
 }
 int	deal_key(t_map *map)
 {
-	// if (key == 53)
-	// 	destroy_notif();
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
 	if(map->key_left == 1)
 	{
@@ -146,8 +146,8 @@ int	deal_key(t_map *map)
 		if (map->pa > 2 * PI)
 			map->pa -= 2 * PI;
 	}
-	pdx = cos(map->pa) * 5;
-	pdy = sin(map->pa) * 5;
+	pdx = cos(map->pa) * 1;
+	pdy = sin(map->pa) * 1;
 	if (map->key_s == 1)
 	{
 		map->py -= pdy;

@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/18 18:41:01 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/20 18:34:49 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define WIDTH 1280
 # define HEIGHT 860
 # define PI 3.14159
-# define TILESIZE 32
+# define TILESIZE 15
 # define WALL_WIDTH 1
 # define BUFFER_SIZE 1
 # define W 13
@@ -66,6 +66,13 @@ typedef struct s_ray
 	int		is_left;
 }	t_ray;
 
+typedef struct s_dataray
+{
+	double	x;
+	double	y;
+	double distance;
+}	t_dataray;
+
 typedef struct s_data
 {
 	void	*img;
@@ -100,10 +107,11 @@ typedef struct s_map
 	int		key_D;
 	int		key_right;
 	int		key_left;
-	float	*ray;
+	//float	*ray;
 	double	pa;
 	t_data	data;
 	t_player player;
+	t_dataray *ray;
 }	t_map;
 
 char	*ft_strrchr(char *s, int c);

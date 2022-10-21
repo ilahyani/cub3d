@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:21:15 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/19 20:01:42 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/20 16:01:04 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,18 @@ static void ft_ix(t_map *map)
 		i++;
 		i1++;
 	}
-	my_mlx_pixel_put(&map->data, map->px*0.25, map->py*0.25, 0x00FFF);
-	my_mlx_pixel_put(&map->data, map->px*0.25, map->py*0.25 - 1, 0x00FFF);
-	my_mlx_pixel_put(&map->data, map->px*0.25 + 1, map->py*0.25, 0x00FFF);
-	my_mlx_pixel_put(&map->data, map->px*0.25, map->py*0.25 + 1, 0x00FFF);
-	my_mlx_pixel_put(&map->data, map->px*0.25 - 1, map->py*0.25, 0x00FFF);
+	i = 0;
+	while (i < WIDTH)
+	{
+		drawline(map, map->px * 0.25, map->py * 0.25, map->ray[i].x * 0.25, map->ray[i].y * 0.25);
+		i++;
+	}
+	
+	// my_mlx_pixel_put(&map->data, map->px*0.25, map->py*0.25, 0x00FFF);
+	// my_mlx_pixel_put(&map->data, map->px*0.25, map->py*0.25 - 1, 0x00FFF);
+	// my_mlx_pixel_put(&map->data, map->px*0.25 + 1, map->py*0.25, 0x00FFF);
+	// my_mlx_pixel_put(&map->data, map->px*0.25, map->py*0.25 + 1, 0x00FFF);
+	// my_mlx_pixel_put(&map->data, map->px*0.25 - 1, map->py*0.25, 0x00FFF);
 }
 void render3d(t_map *map, int num_rays)
 {
@@ -70,7 +77,7 @@ void render3d(t_map *map, int num_rays)
     i = 0;
     while(i < num_rays)
     {
-            double  distance = map->ray[i];
+            double  distance = map->ray[i].distance;
             // float rayDistance = distance;
             // distance = cos(fov) * rayDistance;
             double  distanceprojectplane =  ((WIDTH) / 2) / fabs(tan(M_PI / 6));
@@ -110,7 +117,7 @@ int	cast_rays(t_map *map)
 	fov = 60 * (PI / 180);
 	rayangle = map->pa - (fov / 2);
 	rays = -1;
-	map->ray = (float *)malloc(sizeof(float) * WIDTH);
+	map->ray = (t_dataray *)malloc(sizeof(t_dataray) * WIDTH);
 	jj = 0;
 	while (++rays < WIDTH)
 	{
@@ -138,7 +145,9 @@ void	castray(t_map *map, double rayangle, int i)
 	// printf("h_x: %f, h_y: %f\n", h_pos.x, h_pos.y);
 	// printf("v_x: %f, v_y: %f\n", v_pos.x, v_pos.y);
 	pos = get_shortest_dist(map, h_pos, v_pos);
-	map->ray[i] = Distance(map->px, map->py, pos.x, pos.y) * cos(rayangle - map->pa);
+	map->ray[i].distance = Distance(map->px, map->py, pos.x, pos.y) * cos(rayangle - map->pa);
+	map->ray[i].x = pos.x;
+	map->ray[i].y = pos.y;
 	// printf("x: %f, y: %f\n", pos.x, pos.y);
 	//drawline(map, map->px, map->py, pos.x, pos.y);
 	//drawline(map, map->px * 0.25, map->py * 0.25, pos.x * 0.25, pos.y * 0.25);
