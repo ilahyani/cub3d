@@ -6,7 +6,7 @@
 #    By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 17:52:47 by snouae            #+#    #+#              #
-#    Updated: 2022/10/21 12:25:06 by ilahyani         ###   ########.fr        #
+#    Updated: 2022/10/21 12:28:54 by ilahyani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,10 +49,10 @@ clean_lib:
 	@make clean -C minilibx
 
 clean: clean_lib
-	$(RM) $(OBJ) $(LIB)
+	$(RM) $(OBJ)
 
 fclean: clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(LIB)
 
 re: fclean all
 
