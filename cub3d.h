@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/21 12:00:59 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/22 10:11:28 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 # define WIDTH 1280
 # define HEIGHT 860
 # define PI 3.14159
-# define TILESIZE 15
+# define TILESIZE 16
+# define MINIMAP_SCALE 0.25
 # define WALL_WIDTH 1
 # define BUFFER_SIZE 1
 # define W 13
@@ -52,14 +53,17 @@ typedef struct s_pos
 {
 	double	x;
 	double	y;
+	double	tmpx;
+	double	tmpy;
 }	t_pos;
 
 typedef struct s_ray
 {
 	double	yintercept;
 	double	xintercept;
-	double	xstep;
 	double	ystep;
+	double	xstep;
+	char	direction;
 	int		is_up;
 	int		is_down;
 	int		is_right;
@@ -147,5 +151,6 @@ void	ft_inti_angl_player(t_map *map);
 void	draw_cub(t_map *map, int i, int j, int color);
 void	render3d(t_map *map, int num_rays);
 void	ft_ix(t_map *map);
+int		find_wall_hit(t_pos *pos, t_ray ray, t_map *map);
 
 #endif
