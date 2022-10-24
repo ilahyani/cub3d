@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:54:19 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/21 12:10:31 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/24 10:16:35 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,44 @@
 
 void render3d(t_map *map, int num_rays)
 {
-    int i;
-    int jj = 0;
+    int		i;
+    int		jj;
+	double	walltop;
 
     i = 0;
+	jj = 0;
     while(i < num_rays)
     {
-            double  distance = map->ray[i].distance;
-            // float rayDistance = distance;
-            // distance = cos(fov) * rayDistance;
-            double  distanceprojectplane =  ((WIDTH) / 2) / fabs(tan(M_PI / 6));
-            //printf("the height is %f\n", distanceprojectplane);
-            //float h = (TILESIZE / rayDistance) * distanceprojectplane;
-             double h = ((double)TILESIZE / distance) * distanceprojectplane;
-			if(h > HEIGHT)
-			 	h = HEIGHT;
-             double i1 = ((HEIGHT / 2) - (h / 2));
-             double down = h  + i1;
-			double up = i1;
-			 while (up > 0)
-			 {
-				my_mlx_pixel_put(&map->data, jj, up, 0x87CEEB);
-				up--;
-			 }
-            while (i1 <= down)
-            {
-            		my_mlx_pixel_put(&map->data, jj, i1, 0x00FFFFFF);
-            	i1++;
-            }
-			while (down < HEIGHT)
-			{
-				my_mlx_pixel_put(&map->data, jj, down, 0x236F21);
-				down++;
-			}
-            jj += 1;
+		double  distance = map->ray[i].distance;
+		// float rayDistance = distance;
+		// distance = cos(fov) * rayDistance;
+		double  distanceprojectplane =  ((WIDTH) / 2) / fabs(tan(M_PI / 6));
+		//printf("the height is %f\n", distanceprojectplane);
+		//float h = (TILESIZE / rayDistance) * distanceprojectplane;
+		double h = ((double)TILESIZE / distance) * distanceprojectplane;
+		if(h > HEIGHT)
+			h = HEIGHT;
+		double i1 = ((HEIGHT / 2) - (h / 2));
+		double down = h  + i1;
+		double up = i1;
+		walltop = i1;
+		while (up > 0)
+		{
+		my_mlx_pixel_put(&map->data, jj, up, 0x87CEEB);
+		up--;
+		}
+		while (i1 <= down)
+		{
+			// my_mlx_pixel_put(&map->data, jj, i1, 0x00FFFFFF);
+			apply_texture(map, jj, i1, i, walltop);
+			i1++;
+		}
+		while (down < HEIGHT)
+		{
+			my_mlx_pixel_put(&map->data, jj, down, 0x236F21);
+			down++;
+		}
+		jj += 1;
         i++;
     }
 	ft_ix(map);

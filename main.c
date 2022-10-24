@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 09:02:29 by snouae            #+#    #+#             */
-/*   Updated: 2022/10/19 14:49:10 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/24 12:05:02 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ int	main(int ac, char **av)
 		printf("The map is incorrect, reconfigure it !!!!!!!!!!!");
 		return (1);
 	}
-		map.key_w = 0;
-		map.key_s = 0;
-		map.key_A = 0;
-		map.key_D = 0;
-		map.key_right = 0;
-		map.key_left = 0;
+	map.key_w = 0;
+	map.key_s = 0;
+	map.key_A = 0;
+	map.key_D = 0;
+	map.key_right = 0;
+	map.key_left = 0;
 	map.mlx_ptr = mlx_init();
 	map.win_ptr = mlx_new_window(map.mlx_ptr, WIDTH, HEIGHT, "cub3d");
 	map.data.img = mlx_new_image(map.mlx_ptr, WIDTH, HEIGHT);
@@ -51,11 +51,17 @@ int	main(int ac, char **av)
 			&map.data.bits_per_pixel,
 			&map.data.line_length,
 			&map.data.endian);
+	map.texture.img.img = mlx_xpm_file_to_image(map.mlx_ptr, "./images/bluestone.xpm",
+			&map.texture.img_width, &map.texture.img_height);
+	map.texture.img.addr = mlx_get_data_addr(map.texture.img.img,
+			&map.texture.img.bits_per_pixel,
+			&map.texture.img.line_length,
+			&map.texture.img.endian);
 	ft_inti_angl_player(&map);
 	draw_map(&map);
 	mlx_loop_hook(map.mlx_ptr, deal_key, &map);
 	mlx_hook(map.win_ptr, 02, (1L << 0), check_deal_key, &map);
-	mlx_hook(map.win_ptr, 03, (1L << 1),  keyrealeased, &map);
+	mlx_hook(map.win_ptr, 03, (1L << 1), keyrealeased, &map);
 	mlx_loop(map.mlx_ptr);
 	return (0);
 }

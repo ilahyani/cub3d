@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:21:15 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/22 10:20:19 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/23 17:24:37 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ double  Distance(double x1, double y1, double x2, double y2)
     return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
 }
 
-void	castray(t_map *map, double rayangle, int i)
+void	castray(t_map *map, double rayangle, int index)
 {
 	t_pos	h_pos;
 	t_pos	v_pos;
@@ -48,9 +48,13 @@ void	castray(t_map *map, double rayangle, int i)
 	// printf("h_x: %f, h_y: %f\n", h_pos.x, h_pos.y);
 	// printf("v_x: %f, v_y: %f\n", v_pos.x, v_pos.y);
 	pos = get_shortest_dist(map, h_pos, v_pos);
-	map->ray[i].distance = Distance(map->px, map->py, pos.x, pos.y) * cos(rayangle - map->pa);
-	map->ray[i].x = pos.x;
-	map->ray[i].y = pos.y;
+	map->ray[index].distance = Distance(map->px, map->py, pos.x, pos.y) * cos(rayangle - map->pa);
+	map->ray[index].x = pos.x;
+	map->ray[index].y = pos.y;
+	if (pos.x == h_pos.x && pos.y == h_pos.y)
+		map->ray[index].direction = 'H';
+	else
+		map->ray[index].direction = 'V';
 	// printf("x: %f, y: %f\n", pos.x, pos.y);
 	//drawline(map, map->px, map->py, pos.x, pos.y);
 	//drawline(map, map->px * 0.25, map->py * 0.25, pos.x * 0.25, pos.y * 0.25);

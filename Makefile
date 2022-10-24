@@ -6,7 +6,7 @@
 #    By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 17:52:47 by snouae            #+#    #+#              #
-#    Updated: 2022/10/21 12:28:54 by ilahyani         ###   ########.fr        #
+#    Updated: 2022/10/23 17:48:31 by ilahyani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,11 @@ SRC = main.c\
 	parser/ft_read.c\
 	draw_map.c\
 	cast_rays.c\
-	render_walls.c
+	render_walls.c\
+	wall_textures.c
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -Ofast -g
+FLAGS = -Wall -Wextra -Werror #-fsanitize=address
 MLXFLAGS = -framework OpenGL -framework Appkit
 RM = rm  -rf
 

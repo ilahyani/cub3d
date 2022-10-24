@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/22 10:11:28 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/24 11:49:54 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ typedef struct s_dataray
 {
 	double	x;
 	double	y;
-	double distance;
+	double	distance;
+	char	direction;
 }	t_dataray;
 
 typedef struct s_data
@@ -86,36 +87,43 @@ typedef struct s_data
 	int		endian;
 }	t_data;
 
+typedef struct s_texture
+{
+	t_data	img;
+	int		img_width;
+	int		img_height;
+}	t_texture;
+
 //TODO: create a global t_game struct
 //TODO: organize map struct
 typedef struct s_map
 {
-	char	**m;
-	int		leng_map;
-	int		rows;
-	int		big_width;
-	int		top;
-	int		flags;
-	int		check;
-	int		f[3];
-	int		c[3];
-	double	px;
-	double	py;
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*image;
-	char	view;
-	int		key_w;
-	int		key_s;
-	int		key_A;
-	int		key_D;
-	int		key_right;
-	int		key_left;
-	//float	*ray;
-	double	pa;
-	t_data	data;
-	t_player player;
-	t_dataray *ray;
+	char		**m;
+	int			leng_map;
+	int			rows;
+	int			big_width;
+	int			top;
+	int			flags;
+	int			check;
+	int			f[3];
+	int			c[3];
+	double		px;
+	double		py;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*image;
+	char		view;
+	int			key_w;
+	int			key_s;
+	int			key_A;
+	int			key_D;
+	int			key_right;
+	int			key_left;
+	double		pa;
+	t_data		data;
+	t_player	player;
+	t_dataray	*ray;
+	t_texture	texture;
 }	t_map;
 
 char	*ft_strrchr(char *s, int c);
@@ -152,5 +160,7 @@ void	draw_cub(t_map *map, int i, int j, int color);
 void	render3d(t_map *map, int num_rays);
 void	ft_ix(t_map *map);
 int		find_wall_hit(t_pos *pos, t_ray ray, t_map *map);
+void	apply_texture(t_map *map, double x, double y, int index, double walltop);
+int		*create_texture(void);
 
 #endif
