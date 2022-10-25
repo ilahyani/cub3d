@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/25 11:36:11 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/25 13:34:08 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_texture
 	int		width;
 	int		height;
 	char	*path;
+	char	direction;
 }	t_texture;
 
 //TODO: create a global t_game struct
@@ -127,7 +128,6 @@ typedef struct s_map
 	t_player	player;
 	t_dataray	*ray;
 	t_texture	*textures;
-	t_texture	texture;
 }	t_map;
 
 char	*ft_strrchr(char *s, int c);

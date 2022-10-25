@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:21:15 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/25 12:16:40 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/25 12:21:54 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	cast_rays(t_map *map)
 		castray(map, normalize_angle(rayangle), rays);
 		rayangle += fov / WIDTH;
 	}
-	// create_texture(map);
+	create_texture(map);
 	render3d(map, rays);
 	return (0);
 }

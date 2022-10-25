@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 09:02:29 by snouae            #+#    #+#             */
-/*   Updated: 2022/10/25 12:17:32 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/25 12:18:40 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ int	main(int ac, char **av)
 			&map.data.bits_per_pixel,
 			&map.data.line_length,
 			&map.data.endian);
-	map.texture.img.img = mlx_xpm_file_to_image(map.mlx_ptr, "./texture/redbrick.xpm",
-			&map.texture.width, &map.texture.height);
-	map.texture.img.addr = mlx_get_data_addr(map.texture.img.img,
-			&map.texture.img.bits_per_pixel,
-			&map.texture.img.line_length,
-			&map.texture.img.endian);
+	// map.texture.img.img = mlx_xpm_file_to_image(map.mlx_ptr, "./texture/redbrick.xpm",
+	// 		&map.texture.width, &map.texture.height);
+	// map.texture.img.addr = mlx_get_data_addr(map.texture.img.img,
+	// 		&map.texture.img.bits_per_pixel,
+	// 		&map.texture.img.line_length,
+	// 		&map.texture.img.endian);
 	ft_inti_angl_player(&map);
 	draw_map(&map);
 	mlx_loop_hook(map.mlx_ptr, deal_key, &map);
