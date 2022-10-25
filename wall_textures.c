@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 10:21:57 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/25 14:11:46 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/25 18:18:06 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ void	create_texture(t_map *map)
 	i = -1;
 	while (++i < TEXTURES)
 	{
-		map->textures[i].img.img = mlx_xpm_file_to_image(map->mlx_ptr, map->textures[i].path,
-				&map->textures[i].width, &map->textures[i].height);
+		map->textures[i].img.img = mlx_xpm_file_to_image(map->mlx_ptr,
+				map->textures[i].path,
+				&map->textures[i].width,
+				&map->textures[i].height);
 		if (!map->textures[i].img.img)
 		{
-			printf("Error Reading textures\n GAME CLOSED \n");
+			printf("Error Reading textures\n GAME CLOSED\n");
 			exit(EXIT_FAILURE);
 		}
 		map->textures[i].img.addr = mlx_get_data_addr(map->textures[i].img.img,
@@ -40,9 +42,9 @@ void	create_texture(t_map *map)
 
 void	apply_texture(t_map *map, double x, double y, int index, double wallheight)
 {
+	double		offsetx;
+	double		offsety;
 	int			*buffer;
-	int			offsetx;
-	int			offsety;
 	int			color;
 	t_texture	tex;
 
@@ -54,12 +56,34 @@ void	apply_texture(t_map *map, double x, double y, int index, double wallheight)
 		tex = map->textures[2];
 	else
 		tex = map->textures[3];
-	if (map->ray[index].direction == 'V')
-		offsetx = (((int) map->ray[index].y % TILESIZE) * (tex.width / TILESIZE));
-	else
-		offsetx = (((int) map->ray[index].x % TILESIZE) * (tex.width / TILESIZE));
-	offsety = (y + wallheight / 2 - HEIGHT / 2) * (tex.height / wallheight);
 	buffer = (int *)tex.img.addr;
-	color = buffer[(offsety * tex.width + offsetx)];
+	if (map->ray[index].direction == 'V')
+		offsetx = ((int) map->ray[index].y / TILESIZE);
+	else
+		offsetx = ((int) map->ray[index].x / TILESIZE);
+	offsetx -= floor(offsetx);
+	offsetx *= tex.width;
+	offsety = (y + (wallheight / 2 - HEIGHT / 2)) * (tex.height / wallheight);
+	offsety = floor(offsety);
+	offsety *= tex.width;
+	color = buffer[(int)offsety + (int)offsetx];
+
+	// double k;
+	// k = (tex.height / wallheight);
+	// offsety = y + ((wallheight / 2) - (HEIGHT / 2));
+	// if (offsety < 0)
+	// 	offsety = 0;
+	// offsetx = map->ray[index].x;
+	// if (map->ray[index].direction == 'V')
+	// 	offsetx = map->ray[index].y;
+	// offsetx /= TILESIZE;
+	// offsetx -= floor(offsetx);
+	// offsetx *= map->textures->width;
+	// offsety *=  k;
+	// offsety = floor(offsety);
+	// offsety *= map->textures->width;
+
+	// buffer = (int *)tex.img.addr;
+	// color = buffer[(int)offsetx + (int)offsety];
 	my_mlx_pixel_put(&map->data, x, y, color);
 }

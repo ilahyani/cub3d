@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:54:19 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/25 10:58:24 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:44:33 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void render3d(t_map *map, int num_rays)
 		//printf("the height is %f\n", distanceprojectplane);
 		//float h = (TILESIZE / rayDistance) * distanceprojectplane;
 		double h = ((double)TILESIZE / distance) * distanceprojectplane;
+		double kkk = h;
 		if(h > HEIGHT)
 			h = HEIGHT;
 		double i1 = ((HEIGHT / 2) - (h / 2));
@@ -38,10 +39,11 @@ void render3d(t_map *map, int num_rays)
 			my_mlx_pixel_put(&map->data, jj, up, 0x87CEEB);
 			up--;
 		}
+
 		while (i1 <= down)
 		{
 			// my_mlx_pixel_put(&map->data, jj, i1, 0x00FFFFFF);
-			apply_texture(map, jj, i1, i, h);
+			apply_texture(map, jj, i1, i, kkk);
 			i1++;
 		}
 		while (down < HEIGHT)
