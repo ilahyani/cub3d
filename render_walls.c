@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:54:19 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/24 10:16:35 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/25 10:58:24 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void render3d(t_map *map, int num_rays)
 {
     int		i;
     int		jj;
-	double	walltop;
 
     i = 0;
 	jj = 0;
@@ -34,16 +33,15 @@ void render3d(t_map *map, int num_rays)
 		double i1 = ((HEIGHT / 2) - (h / 2));
 		double down = h  + i1;
 		double up = i1;
-		walltop = i1;
 		while (up > 0)
 		{
-		my_mlx_pixel_put(&map->data, jj, up, 0x87CEEB);
-		up--;
+			my_mlx_pixel_put(&map->data, jj, up, 0x87CEEB);
+			up--;
 		}
 		while (i1 <= down)
 		{
 			// my_mlx_pixel_put(&map->data, jj, i1, 0x00FFFFFF);
-			apply_texture(map, jj, i1, i, walltop);
+			apply_texture(map, jj, i1, i, h);
 			i1++;
 		}
 		while (down < HEIGHT)

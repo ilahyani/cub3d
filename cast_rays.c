@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:21:15 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/23 17:24:37 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/25 12:16:40 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	cast_rays(t_map *map)
 		castray(map, normalize_angle(rayangle), rays);
 		rayangle += fov / WIDTH;
 	}
+	// create_texture(map);
 	render3d(map, rays);
 	return (0);
 }
@@ -51,6 +52,7 @@ void	castray(t_map *map, double rayangle, int index)
 	map->ray[index].distance = Distance(map->px, map->py, pos.x, pos.y) * cos(rayangle - map->pa);
 	map->ray[index].x = pos.x;
 	map->ray[index].y = pos.y;
+	map->ray[index].angle = rayangle;
 	if (pos.x == h_pos.x && pos.y == h_pos.y)
 		map->ray[index].direction = 'H';
 	else

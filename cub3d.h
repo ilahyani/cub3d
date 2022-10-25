@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/24 11:49:54 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/25 11:36:11 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define PI 3.14159
 # define TILESIZE 16
 # define MINIMAP_SCALE 0.25
+# define TEXTURES 4
 # define WALL_WIDTH 1
 # define BUFFER_SIZE 1
 # define W 13
@@ -75,6 +76,7 @@ typedef struct s_dataray
 	double	x;
 	double	y;
 	double	distance;
+	double	angle;
 	char	direction;
 }	t_dataray;
 
@@ -90,8 +92,9 @@ typedef struct s_data
 typedef struct s_texture
 {
 	t_data	img;
-	int		img_width;
-	int		img_height;
+	int		width;
+	int		height;
+	char	*path;
 }	t_texture;
 
 //TODO: create a global t_game struct
@@ -123,6 +126,7 @@ typedef struct s_map
 	t_data		data;
 	t_player	player;
 	t_dataray	*ray;
+	t_texture	*textures;
 	t_texture	texture;
 }	t_map;
 
@@ -160,7 +164,7 @@ void	draw_cub(t_map *map, int i, int j, int color);
 void	render3d(t_map *map, int num_rays);
 void	ft_ix(t_map *map);
 int		find_wall_hit(t_pos *pos, t_ray ray, t_map *map);
-void	apply_texture(t_map *map, double x, double y, int index, double walltop);
-int		*create_texture(void);
+void	apply_texture(t_map *map, double x, double y, int index, double wallheight);
+void	create_texture(t_map *map);
 
 #endif
