@@ -6,7 +6,7 @@
 #    By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 17:52:47 by snouae            #+#    #+#              #
-#    Updated: 2022/10/23 17:48:31 by ilahyani         ###   ########.fr        #
+#    Updated: 2022/10/26 11:42:20 by ilahyani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRC = main.c\
 	draw_map.c\
 	cast_rays.c\
 	render_walls.c\
-	wall_textures.c
+	wall_textures.c\
+	mouse_move.c
 
 CC = gcc
 FLAGS = -Wall -Wextra -Werror #-fsanitize=address

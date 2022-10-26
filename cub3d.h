@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/26 09:49:43 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/26 11:37:53 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void		draw_map(t_map *map);
 int			cast_rays(t_map *map);
 int			deal_key(t_map *map);
 int			keyrealeased(int key, t_map *map);
-int		c	heck_deal_key(int key, t_map *map);
+int			check_deal_key(int key, t_map *map);
 int			destroy_notif(void);
 void		castray(t_map *map, double rayangle, int i);
 double		normalize_angle(double angle);
@@ -167,5 +167,6 @@ int			find_wall_hit(t_pos *pos, t_ray ray, t_map *map);
 int			get_texture(t_map *map, double y, int index, double wallheight);
 void		create_texture(t_map *map);
 t_texture	choose_texture(t_map *map, int ray_id);
+int			mouse_move(int x, int y, void *param);
 
 #endif
