@@ -6,11 +6,50 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 10:21:57 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/25 18:18:06 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/26 09:50:22 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	get_texture(t_map *map, double y, int index, double wallheight)
+{
+	double		offsetx;
+	double		offsety;
+	int			*buffer;
+	t_texture	tex;
+
+	tex = choose_texture(map, index);
+	if (map->ray[index].direction == 'V')
+		offsetx = (map->ray[index].y / (double) TILESIZE);
+	else
+		offsetx = (map->ray[index].x / (double) TILESIZE);
+	offsetx -= (int) offsetx;
+	offsetx *= tex.width;
+	offsety = (y + (wallheight / 2 - HEIGHT / 2)) * (tex.height / wallheight);
+	offsety = (int) offsety;
+	offsety *= tex.width;
+	buffer = (int *)tex.img.addr;
+	return (buffer[(int)offsety + (int)offsetx]);
+}
+
+t_texture	choose_texture(t_map *map, int ray_id)
+{
+	if (map->ray[ray_id].angle >= 0
+		&& map->ray[ray_id].angle <= M_PI
+		&& map->ray[ray_id].direction == 'H')
+		return (map->textures[0]);
+	else if ((map->ray[ray_id].angle < M_PI / 2
+			|| map->ray[ray_id].angle > 3 * M_PI / 2)
+		&& map->ray[ray_id].direction == 'V')
+		return (map->textures[1]);
+	else if (map->ray[ray_id].angle > M_PI / 2
+		&& map->ray[ray_id].angle < 3 * M_PI / 2
+		&& map->ray[ray_id].direction == 'V')
+		return (map->textures[2]);
+	else
+		return (map->textures[3]);
+}
 
 void	create_texture(t_map *map)
 {
@@ -38,52 +77,4 @@ void	create_texture(t_map *map)
 				&map->textures[i].img.line_length,
 				&map->textures[i].img.endian);
 	}
-}
-
-void	apply_texture(t_map *map, double x, double y, int index, double wallheight)
-{
-	double		offsetx;
-	double		offsety;
-	int			*buffer;
-	int			color;
-	t_texture	tex;
-
-	if (map->ray[index].angle >= 0 && map->ray[index].angle <= M_PI && map->ray[index].direction == 'H')
-		tex = map->textures[0];
-	else if ((map->ray[index].angle < M_PI / 2 || map->ray[index].angle > 3 * M_PI / 2) && map->ray[index].direction == 'V')
-		tex = map->textures[1];
-	else if ((map->ray[index].angle > M_PI / 2 && map->ray[index].angle < 3 * M_PI / 2) && map->ray[index].direction == 'V')
-		tex = map->textures[2];
-	else
-		tex = map->textures[3];
-	buffer = (int *)tex.img.addr;
-	if (map->ray[index].direction == 'V')
-		offsetx = ((int) map->ray[index].y / TILESIZE);
-	else
-		offsetx = ((int) map->ray[index].x / TILESIZE);
-	offsetx -= floor(offsetx);
-	offsetx *= tex.width;
-	offsety = (y + (wallheight / 2 - HEIGHT / 2)) * (tex.height / wallheight);
-	offsety = floor(offsety);
-	offsety *= tex.width;
-	color = buffer[(int)offsety + (int)offsetx];
-
-	// double k;
-	// k = (tex.height / wallheight);
-	// offsety = y + ((wallheight / 2) - (HEIGHT / 2));
-	// if (offsety < 0)
-	// 	offsety = 0;
-	// offsetx = map->ray[index].x;
-	// if (map->ray[index].direction == 'V')
-	// 	offsetx = map->ray[index].y;
-	// offsetx /= TILESIZE;
-	// offsetx -= floor(offsetx);
-	// offsetx *= map->textures->width;
-	// offsety *=  k;
-	// offsety = floor(offsety);
-	// offsety *= map->textures->width;
-
-	// buffer = (int *)tex.img.addr;
-	// color = buffer[(int)offsetx + (int)offsety];
-	my_mlx_pixel_put(&map->data, x, y, color);
 }

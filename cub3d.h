@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/25 17:28:30 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/26 09:49:43 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,41 +130,42 @@ typedef struct s_map
 	t_texture	*textures;
 }	t_map;
 
-char	*ft_strrchr(char *s, int c);
-int		ft_strcmp(char *s1, char *s2);
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strchr(const char *s, int c);
-int		ft_strlen(char *s);
-char	*get_next_line(int fd);
-char	*ft_strdup(char *s);
-char	**ft_split(char const *s, char c);
-int		ft_atoi(char *str);
-void	ft_read(char *path, t_map *map);
-int		ft_check_path(t_map *map);
-int		ft_handle_map(t_map *map, int i, int *j, int *c_player);
-int		skip_lines(t_map *map, int i);
-int		search_way(t_map *map, char *way, int *i, int *j);
-int		skip_spaces(char *str);
-int		cherche_symbol(char c, char *str);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	draw_map(t_map *map);
-int		cast_rays(t_map *map);
-int		deal_key(t_map *map);
-int		keyrealeased(int key, t_map *map);
-int		check_deal_key(int key, t_map *map);
-int		destroy_notif(void);
-void	castray(t_map *map, double rayangle, int i);
-double	normalize_angle(double angle);
-t_pos	get_horizontal_intersect(t_map *map, double rayangle);
-t_pos	get_vertical_intersect(t_map *map, double rayangle);
-t_pos	get_shortest_dist(t_map *map, t_pos h_pos, t_pos v_pos);
-void	drawline(t_map *map, double x0, double y0, double x1, double y1);
-void	ft_inti_angl_player(t_map *map);
-void	draw_cub(t_map *map, int i, int j, int color);
-void	render3d(t_map *map, int num_rays);
-void	ft_ix(t_map *map);
-int		find_wall_hit(t_pos *pos, t_ray ray, t_map *map);
-void	apply_texture(t_map *map, double x, double y, int index, double wallheight);
-void	create_texture(t_map *map);
+char		*ft_strrchr(char *s, int c);
+int			ft_strcmp(char *s1, char *s2);
+char		*ft_strjoin(char *s1, char *s2);
+char		*ft_strchr(const char *s, int c);
+int			ft_strlen(char *s);
+char		*get_next_line(int fd);
+char		*ft_strdup(char *s);
+char		**ft_split(char const *s, char c);
+int			ft_atoi(char *str);
+void		ft_read(char *path, t_map *map);
+int			ft_check_path(t_map *map);
+int			ft_handle_map(t_map *map, int i, int *j, int *c_player);
+int			skip_lines(t_map *map, int i);
+int			search_way(t_map *map, char *way, int *i, int *j);
+int			skip_spaces(char *str);
+int			cherche_symbol(char c, char *str);
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void		draw_map(t_map *map);
+int			cast_rays(t_map *map);
+int			deal_key(t_map *map);
+int			keyrealeased(int key, t_map *map);
+int		c	heck_deal_key(int key, t_map *map);
+int			destroy_notif(void);
+void		castray(t_map *map, double rayangle, int i);
+double		normalize_angle(double angle);
+t_pos		get_horizontal_intersect(t_map *map, double rayangle);
+t_pos		get_vertical_intersect(t_map *map, double rayangle);
+t_pos		get_shortest_dist(t_map *map, t_pos h_pos, t_pos v_pos);
+void		drawline(t_map *map, double x0, double y0, double x1, double y1);
+void		ft_inti_angl_player(t_map *map);
+void		draw_cub(t_map *map, int i, int j, int color);
+void		render3d(t_map *map, int num_rays);
+void		ft_ix(t_map *map);
+int			find_wall_hit(t_pos *pos, t_ray ray, t_map *map);
+int			get_texture(t_map *map, double y, int index, double wallheight);
+void		create_texture(t_map *map);
+t_texture	choose_texture(t_map *map, int ray_id);
 
 #endif
