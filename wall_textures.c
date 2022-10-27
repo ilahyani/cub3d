@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 10:21:57 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/26 10:45:12 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/27 12:48:23 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,13 @@ void	create_texture(t_map *map)
 	int	i;
 
 	map->textures = (t_texture *) malloc(sizeof(t_texture) * TEXTURES);
-	// map->textures[0].path = "./texture/lava01.xpm";
-	// map->textures[1].path = "./texture/lava02.xpm";
-	// map->textures[2].path = "./texture/lava03.xpm";
-	// map->textures[3].path = "./texture/lava04.xpm";
+	map->textures[1].path = "./texture/Roger.xpm";
+	map->textures[2].path = "./texture/gear5.xpm";
+	map->textures[3].path = "./texture/luffy.xpm";
+	// map->textures[1].path = "./texture/colorstone.xpm";
+	// map->textures[2].path = "./texture/purplestone.xpm";
+	// map->textures[3].path = "./texture/redbrick.xpm";
 	map->textures[0].path = "./texture/bluestone.xpm";
-	map->textures[1].path = "./texture/graystone.xpm";
-	map->textures[2].path = "./texture/wood.xpm";
-	map->textures[3].path = "./texture/redbrick.xpm";
 	i = -1;
 	while (++i < TEXTURES)
 	{

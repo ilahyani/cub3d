@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 09:02:29 by snouae            #+#    #+#             */
-/*   Updated: 2022/10/27 09:43:21 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/27 15:24:40 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	main(int ac, char **av)
 	mlx_hook(map.win_ptr, 02, (1L << 0), check_deal_key, &map);
 	mlx_hook(map.win_ptr, 03, (1L << 1), keyrealeased, &map);
 	mlx_hook(map.win_ptr, 06, (1L << 1), mouse_move, &map);
-	// mlx_loop_hook(map.win_ptr, mouse_move, &map);
 	mlx_loop(map.mlx_ptr);
 	return (0);
 }

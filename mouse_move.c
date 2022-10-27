@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:38:32 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/27 09:44:22 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/27 15:26:38 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int	mouse_move(int x, int y, void *param)
 	{
 		if (x < WIDTH / 2)
 		{
-			map->pa -= 0.05;
+			map->pa -= 0.03;
 			if (map->pa < 0)
 				map->pa += 2 * PI;
 		}
 		if (x >= WIDTH / 2)
 		{
-			map->pa += 0.05;
+			map->pa += 0.03;
 			if (map->pa > 2 * PI)
 				map->pa -= 2 * PI;
 		}

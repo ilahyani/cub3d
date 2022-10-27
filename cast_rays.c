@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:21:15 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/25 16:24:46 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/27 09:48:58 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,94 +198,3 @@ double	normalize_angle(double angle)
 		return (angle + (2 * PI));
 	return (angle);
 }
-/*
-t_pos	get_vertical_intersect(t_map *map, double rayangle)
-{
-	t_pos	pos;
-	t_ray	ray;
-
-	pos.x = WIDTH;
-	pos.y = HEIGHT;
-	set_ray_direction(rayangle, &ray);
-	ray.xintercept = floor(map->px / TILESIZE) * TILESIZE;
-	if (ray.is_right)
-		ray.xintercept += TILESIZE;
-	ray.yintercept = map->py + (ray.xintercept - map->px) * tan(rayangle);
-	ray.xstep = TILESIZE;
-	if (ray.is_left)
-		ray.xstep *= -1;
-	ray.ystep = TILESIZE * tanf(rayangle);
-	if (ray.is_up && ray.ystep > 0)
-			ray.ystep *= -1;
-	else if (ray.is_down && ray.ystep < 0)
-			ray.ystep *= -1;
-	// if (ray.is_left)
-	// 	ray.xintercept--;
-	// printf("v_xintercept: %f  ", ray.xintercept);
-	// printf("v_yintercept: %f\n", ray.yintercept);
-	// printf("v_xstep %f  ", ray.xstep);
-	// printf("v_ystep %f\n", ray.ystep);
-	while (69)
-	{
-		pos.x = ray.xintercept;
-		pos.y = ray.yintercept;
-		pos.tmpx = ray.xintercept;
-		if (ray.is_left)
-			pos.tmpx--;
-		if (pos.y > (map->rows) * TILESIZE || pos.y < 0
-			|| pos.tmpx > map->big_width * TILESIZE || pos.tmpx < 0)
-			return (pos);
-		if (map->m[(int)pos.y / TILESIZE + map->top]
-			[(int)pos.tmpx / TILESIZE] != '0')
-			return (pos);
-		ray.xintercept += ray.xstep;
-		ray.yintercept += ray.ystep;
-	}
-	return (pos);
-}
-
-t_pos	get_horizontal_intersect(t_map *map, double rayangle)
-{
-	t_pos	pos;
-	t_ray	ray;
-
-	pos.x = WIDTH;
-	pos.y = HEIGHT;
-	set_ray_direction(rayangle, &ray);
-	ray.yintercept = floor(map->py / TILESIZE) * TILESIZE;
-	if (ray.is_down)
-		ray.yintercept += TILESIZE;
-	ray.xintercept = map->px + (ray.yintercept - map->py) / tanf(rayangle);
-	ray.ystep = TILESIZE;
-	if (ray.is_up)
-		ray.ystep *= -1;
-	ray.xstep = TILESIZE / tan(rayangle);
-	if (ray.is_left && ray.xstep > 0)
-			ray.xstep *= -1;
-	else if (ray.is_right && ray.xstep < 0)
-			ray.xstep *= -1;
-	// if (ray.is_up)
-	// 	ray.yintercept--;
-	// printf("h_xintercept: %f  ", ray.xintercept);
-	// printf("h_yintercept: %f\n", ray.yintercept);
-	// printf("h_xstep %f  ", ray.xstep);
-	// printf("h_ystep %f\n", ray.ystep);
-	while (69)
-	{
-		pos.x = ray.xintercept;
-		pos.y = ray.yintercept;
-		pos.tmpy = ray.yintercept;
-		if (ray.is_up)
-			pos.tmpy--;
-		if (pos.tmpy > (map->rows) * TILESIZE || pos.tmpy < 0
-			|| pos.x > map->big_width * TILESIZE || pos.x < 0)
-			return (pos);
-		if (map->m[(int)pos.tmpy / TILESIZE + map->top]
-			[((int)pos.x) / TILESIZE] != '0')
-			return (pos);
-		ray.xintercept += ray.xstep;
-		ray.yintercept += ray.ystep;
-	}
-	return (pos);
-}
-*/
