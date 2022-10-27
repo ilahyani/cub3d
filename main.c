@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 09:02:29 by snouae            #+#    #+#             */
-/*   Updated: 2022/10/26 18:17:23 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/27 15:58:36 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ int	main(int ac, char **av)
 		printf("The map is incorrect, reconfigure it !!!!!!!!!!!");
 		return (1);
 	}
-		map.key_w = 0;
-		map.key_s = 0;
-		map.key_A = 0;
-		map.key_D = 0;
-		map.key_right = 0;
-		map.key_left = 0;
-		map.space = 0;
+	map.key_w = 0;
+	map.key_s = 0;
+	map.key_A = 0;
+	map.key_D = 0;
+	map.key_right = 0;
+	map.key_left = 0;
 	map.mlx_ptr = mlx_init();
+	mlx_mouse_hide();
 	map.win_ptr = mlx_new_window(map.mlx_ptr, WIDTH, HEIGHT, "cub3d");
 	map.data.img = mlx_new_image(map.mlx_ptr, WIDTH, HEIGHT);
 	map.data.addr = mlx_get_data_addr(map.data.img,
@@ -56,7 +56,8 @@ int	main(int ac, char **av)
 	draw_map(&map);
 	mlx_loop_hook(map.mlx_ptr, deal_key, &map);
 	mlx_hook(map.win_ptr, 02, (1L << 0), check_deal_key, &map);
-	mlx_hook(map.win_ptr, 03, (1L << 1),  keyrealeased, &map);
+	mlx_hook(map.win_ptr, 03, (1L << 1), keyrealeased, &map);
+	mlx_hook(map.win_ptr, 06, (1L << 1), mouse_move, &map);
 	mlx_loop(map.mlx_ptr);
 	return (0);
 }

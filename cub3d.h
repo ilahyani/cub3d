@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/26 19:07:13 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/27 16:11:49 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 # define HEIGHT 860
 # define size_minimap 200
 # define JUMP_SPEED 20
-# define CUBMAP 5
+# define CUBMAP 15
 # define DIV_CUB floor(size_minimap / CUBMAP)
 # define PI 3.14159
-# define TILESIZE 32
+# define TILESIZE 16
 # define WALL_WIDTH 1
 # define BUFFER_SIZE 1
 # define W 13
@@ -36,6 +36,16 @@
 # define A 0
 # define D 2
 #define sizemap 0.25
+# define TEXTURES 4
+
+typedef struct s_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_data;
 
 typedef struct s_dda
 {
@@ -45,6 +55,15 @@ typedef struct s_dda
 	double	xinc;
 	double	yinc;
 }	t_dda;
+
+typedef struct s_texture
+{
+	t_data	img;
+	int		width;
+	int		height;
+	char	*path;
+	char	direction;
+}	t_texture;
 
 typedef struct s_player
 {
@@ -57,14 +76,17 @@ typedef struct s_pos
 {
 	double	x;
 	double	y;
+	double	tmpx;
+	double	tmpy;
 }	t_pos;
 
 typedef struct s_ray
 {
 	double	yintercept;
 	double	xintercept;
-	double	xstep;
 	double	ystep;
+	double	xstep;
+	char	direction;
 	int		is_up;
 	int		is_down;
 	int		is_right;
@@ -76,16 +98,10 @@ typedef struct s_dataray
 	double	x;
 	double	y;
 	double distance;
+	double	angle;
+	char	direction;
 }	t_dataray;
 
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_data;
 
 //TODO: create a global t_game struct
 //TODO: organize map struct
@@ -115,6 +131,7 @@ typedef struct s_map
 	int		key_left;
 	//float	*ray;
 	double	pa;
+	t_texture	*textures;
 	t_data	data;
 	t_player player;
 	t_dataray *ray;
@@ -155,5 +172,10 @@ void	render3d(t_map *map, int num_rays);
 void	ft_mini_map(t_map *map);
 float 	Distance(float x1, float y1, float x2, float y2);
 void	jump(t_map *map, int num_rays);
+int			find_wall_hit(t_pos *pos, t_ray ray, t_map *map);
+int			get_texture(t_map *map, double y, int index, double wallheight);
+void		create_texture(t_map *map);
+t_texture	choose_texture(t_map *map, int ray_id);
+int			mouse_move(int x, int y, void *param);
 
 #endif

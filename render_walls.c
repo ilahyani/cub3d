@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:54:19 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/26 19:11:59 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/27 16:07:16 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void render3d(t_map *map, int num_rays)
 {
     int i;
     int jj = 0;
+    int		texture_color;
     i = 0;
     while(i < num_rays)
     {
@@ -125,6 +126,7 @@ void render3d(t_map *map, int num_rays)
         //printf("the height is %f\n", distanceprojectplane);
         //float h = (TILESIZE / rayDistance) * distanceprojectplane;
             double h = ((double)TILESIZE / distance) * distanceprojectplane;
+            double real_height = h;
         if(h > HEIGHT)
             h = HEIGHT;
             double i1 = ((HEIGHT / 2) - (h / 2));
@@ -132,12 +134,13 @@ void render3d(t_map *map, int num_rays)
         double up = i1;
             while (up > 0)
             {
-            my_mlx_pixel_put(&map->data, jj, up, 0x87CEEB);
+            my_mlx_pixel_put(&map->data, jj, up, 0x236F21);
             up--;
             }
         while (i1 <= down)
         {
-                my_mlx_pixel_put(&map->data, jj, i1, 0x00FFFFFF);
+                texture_color = get_texture(map, i1, i, real_height);
+                my_mlx_pixel_put(&map->data, jj, i1, texture_color);
             i1++;
         }
         while (down < HEIGHT)
