@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:21:15 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/21 11:55:21 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/27 15:35:36 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,13 @@ int	cast_rays(t_map *map)
 	map->ray = (t_dataray *)malloc(sizeof(t_dataray) * WIDTH);
 	while (++rays < WIDTH)
 	{
-		castray(map, normalize_angle(rayangle), rays);
+		castray(map, normalize_angle(rayangle), rays , 1);
 		rayangle += fov / WIDTH;
 	}
-	render3d(map, rays);
+	if (map->space > 0)
+		jump(map, rays);
+	 else
+		render3d(map, rays);
 	return (0);
 }
 
@@ -36,7 +39,7 @@ float Distance(float x1, float y1, float x2, float y2)
     return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
 }
 
-void	castray(t_map *map, double rayangle, int i)
+t_pos	castray(t_map *map, double rayangle, int i, int flag)
 {
 	t_pos	h_pos;
 	t_pos	v_pos;
@@ -48,11 +51,17 @@ void	castray(t_map *map, double rayangle, int i)
 	// printf("h_x: %f, h_y: %f\n", h_pos.x, h_pos.y);
 	// printf("v_x: %f, v_y: %f\n", v_pos.x, v_pos.y);
 	pos = get_shortest_dist(map, h_pos, v_pos);
-	map->ray[i].distance = Distance(map->px, map->py, pos.x, pos.y) * cos(rayangle - map->pa);
-	map->ray[i].x = pos.x;
-	map->ray[i].y = pos.y;
+	if(!flag)
+		drawline(map, map->px, map->py, pos.x, pos.y);
+	if(flag == 1)
+	{
+		map->ray[i].distance = Distance(map->px, map->py, pos.x, pos.y) * cos(rayangle - map->pa);
+		map->ray[i].x = pos.x;
+		map->ray[i].y = pos.y;
+	}
+	return (pos);
 	// printf("x: %f, y: %f\n", pos.x, pos.y);
-	//drawline(map, map->px, map->py, pos.x, pos.y);
+	//puts("heeeeer");
 	//drawline(map, map->px * 0.25, map->py * 0.25, pos.x * 0.25, pos.y * 0.25);
 }
 

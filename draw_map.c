@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:57:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/20 18:35:46 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/27 01:54:40 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,22 +62,22 @@ void	ft_pixel(t_map *map)
 	// int j;
 	// int i1;
 
-	// i = 0, j = 0, i1 = 0;
-	// while (i < HEIGHT)
+	// i = map->top, j = 0, i1 = 0;
+	// while (i < map->rows)
 	// {
 	// 	j = 0;
-	// 	while (j < WIDTH)
+	// 	while (j < map->big_width)
 	// 	{
-	// 		// if(map->m[i][j] == '1')
+	// 		 if(map->m[i][j] == '1')
 	// 			draw_cub(map, i1 ,j, 0x236F21);
-	// 		// else if (map->m[i][j] != ' ')
-	// 		// 	draw_cub(map, i1 ,j, 0x00FFFF, 0);
+	// 		else if (map->m[i][j] != ' ')
+	// 			draw_cub(map, i1 ,j, 0x00FFFF);
 	// 		j++;
 	// 	}
 	// 	i++;
 	// 	i1++;
 	// }
-
+	//draw_cub(map, map->px ,map->py, 0x7CFC00);
 	// i = 0, j = 0, i1 = 0;
 	// while (i < HEIGHT / 20)
 	// {
@@ -96,11 +96,13 @@ void	ft_pixel(t_map *map)
 
 int check_deal_key(int key, t_map *map)
 {
-	//printf("the key is %d\n", key);
+	// printf("the key is %d\n", key);
 	if (key == 53)
 		destroy_notif();
 	if(key == W)
 		map->key_w = 1;
+	if(key == 49)
+		map->space = 30;
 	else if(key == S)
 		map->key_s = 1;
 	else if(key == A)
@@ -150,28 +152,52 @@ int	deal_key(t_map *map)
 	pdy = sin(map->pa) * 1;
 	if (map->key_s == 1)
 	{
-		map->py -= pdy;
-		map->px -= pdx;
-		if(map->m[(int)map->py / TILESIZE + map->top][(int)map->px / TILESIZE] != '0')
-		{
-			map->py += pdy;
-			map->px += pdx;
-		}
-	}
-	if (map->key_w == 1)
-	{
-		map->py += pdy;
-		map->px += pdx;
-		if(map->m[(int)map->py / TILESIZE + map->top][(int)map->px / TILESIZE] != '0')
+		//int check = 0;
+		t_pos pos;
+		pos = castray(map, normalize_angle(map->pa + PI), -1 , 0);
+		//  printf("x %f and y %f\n", map->px, map->py);
+		//  printf("the xray %f and yray %f\n", pos.x , pos.y);
+		//  printf("x %f \n", fabs(pos.x - map->px));
+		//  printf("y %f \n", fabs(pos.y - map->py));
+		// map->py -= pdy;
+		// map->px -= pdx;
+		// if(map->m[(int)map->py / TILESIZE + map->top] [(int)map->px / TILESIZE] != '0')
+		// {
+		// 	map->py += pdy;
+		// 	map->px += pdx;
+		// 	check = 1;
+		// }
+		// !check && (fabs(pos.x - map->px) <  1 && fabs(pos.y - map->py) < 1)
+		
+		if( Distance(map->px, map->py, pos.x, pos.y) > 3)
 		{
 			map->py -= pdy;
 			map->px -= pdx;
 		}
 	}
+	if (map->key_w == 1)
+	{
+		//printf("the first is |%c|\n", map->m[(int)map->py / TILESIZE + map->top - 1][(int)map->px / TILESIZE]);
+		// printf("the seconde is |%c|\n", map->m[(int)map->py / TILESIZE + map->top][(int)map->px / TILESIZE + 1]);
+		 //printf("the xray %f and yray %f\n", map->ray[HEIGHT / 2].x , map->ray[HEIGHT / 2].y);
+		// if(map->m[(int)map->py / TILESIZE + map->top][(int)map->px / TILESIZE] != '0')
+		//  	// && map->m[(int)map->py / TILESIZE + map->top][(int)map->px / TILESIZE - 1] == '1'))
+		// {
+		// 	map->py -= pdy;
+		// 	map->px -= pdx;
+		// }
+		//if(map)
+		//printf("x %f and y %f\n", map->px, map->py);
+		if(fabs(floor(map->ray[WIDTH / 2].x - map->px)) > 2 || fabs(floor(map->ray[WIDTH / 2].y - map->py)) > 2)
+		{
+			map->py += pdy;
+			map->px += pdx;
+		}
+	}
+	pdx = cos(map->pa - M_PI_2) * 1;
+	pdy = sin(map->pa - M_PI_2) * 1;;
 	if (map->key_A == 1)
 	{
-		pdx = cos(fabs(map->pa - M_PI_2)) * 1;
-		pdy = sin(fabs(map->pa - M_PI_2)) * 1;;
 		map->py += pdy;
 		map->px += pdx;
 		if(map->m[(int)map->py / TILESIZE + map->top][(int)map->px / TILESIZE] != '0')
@@ -182,14 +208,12 @@ int	deal_key(t_map *map)
 	}
 	if (map->key_D == 1)
 	{
-		pdx = cos(fabs(map->pa + M_PI_2)) * 1;
-		pdy = sin(fabs(map->pa + M_PI_2)) * 1;;
-		map->py += pdy;
-		map->px += pdx;
+		map->py -= pdy;
+		map->px -= pdx;
 		if(map->m[(int)map->py / TILESIZE + map->top][(int)map->px / TILESIZE] != '0')
 		{
-			map->py -= pdy;
-			map->px -= pdx;
+			map->py += pdy;
+			map->px += pdx;
 		}
 	}
 	draw_map(map);

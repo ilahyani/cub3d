@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+         #
+#    By: snouae <snouae@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 17:52:47 by snouae            #+#    #+#              #
-#    Updated: 2022/10/21 11:57:05 by ilahyani         ###   ########.fr        #
+#    Updated: 2022/10/21 12:14:45 by snouae           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRC = main.c\
 	parser/ft_read.c\
 	draw_map.c\
 	cast_rays.c\
-	render_walls.c
+	render_walls.c\
+	ft_minimap.c
 
 CC = gcc
 FLAGS = -Wall -Wextra -Werror -Ofast -g

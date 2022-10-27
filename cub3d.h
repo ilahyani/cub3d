@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/21 12:00:59 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:07:13 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,19 @@
 
 # define WIDTH 1280
 # define HEIGHT 860
+# define size_minimap 200
+# define JUMP_SPEED 20
+# define CUBMAP 5
+# define DIV_CUB floor(size_minimap / CUBMAP)
 # define PI 3.14159
-# define TILESIZE 15
+# define TILESIZE 32
 # define WALL_WIDTH 1
 # define BUFFER_SIZE 1
 # define W 13
 # define S 1
 # define A 0
 # define D 2
+#define sizemap 0.25
 
 typedef struct s_dda
 {
@@ -105,6 +110,7 @@ typedef struct s_map
 	int		key_s;
 	int		key_A;
 	int		key_D;
+	int		space;
 	int		key_right;
 	int		key_left;
 	//float	*ray;
@@ -137,7 +143,7 @@ int		deal_key(t_map *map);
 int		keyrealeased(int key, t_map *map);
 int		check_deal_key(int key, t_map *map);
 int		destroy_notif(void);
-void	castray(t_map *map, double rayangle, int i);
+t_pos	castray(t_map *map, double rayangle, int i, int flag);
 double	normalize_angle(double angle);
 t_pos	get_horizontal_intersect(t_map *map, double rayangle);
 t_pos	get_vertical_intersect(t_map *map, double rayangle);
@@ -146,6 +152,8 @@ void	drawline(t_map *map, double x0, double y0, double x1, double y1);
 void	ft_inti_angl_player(t_map *map);
 void	draw_cub(t_map *map, int i, int j, int color);
 void	render3d(t_map *map, int num_rays);
-void	ft_ix(t_map *map);
+void	ft_mini_map(t_map *map);
+float 	Distance(float x1, float y1, float x2, float y2);
+void	jump(t_map *map, int num_rays);
 
 #endif
