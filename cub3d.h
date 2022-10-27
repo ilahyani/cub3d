@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/26 11:37:53 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/27 09:43:44 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <limits.h>
 # include "minilibx/mlx.h"
 
-# define WIDTH 1280
-# define HEIGHT 860
+# define WIDTH 1440
+# define HEIGHT 900
 # define PI 3.14159
 # define TILESIZE 16
 # define MINIMAP_SCALE 0.25

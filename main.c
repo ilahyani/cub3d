@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 09:02:29 by snouae            #+#    #+#             */
-/*   Updated: 2022/10/26 14:01:06 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/27 09:43:21 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	main(int ac, char **av)
 	map.key_right = 0;
 	map.key_left = 0;
 	map.mlx_ptr = mlx_init();
+	mlx_mouse_hide();
 	map.win_ptr = mlx_new_window(map.mlx_ptr, WIDTH, HEIGHT, "cub3d");
 	map.data.img = mlx_new_image(map.mlx_ptr, WIDTH, HEIGHT);
 	map.data.addr = mlx_get_data_addr(map.data.img,

@@ -6,7 +6,7 @@
 #    By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 17:52:47 by snouae            #+#    #+#              #
-#    Updated: 2022/10/26 11:42:20 by ilahyani         ###   ########.fr        #
+#    Updated: 2022/10/27 09:41:26 by ilahyani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC = main.c\
 	mouse_move.c
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror #-fsanitize=address
+FLAGS = -Wall -Wextra -Werror -Ofast #-fsanitize=address
 MLXFLAGS = -framework OpenGL -framework Appkit
 RM = rm  -rf
 
