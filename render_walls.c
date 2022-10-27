@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:54:19 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/27 16:07:16 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/27 17:39:30 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,32 +117,44 @@ void render3d(t_map *map, int num_rays)
     int jj = 0;
     int		texture_color;
     i = 0;
-    while(i < num_rays)
+    num_rays = 0;
+    while(i < WIDTH)
     {
         double  distance = map->ray[i].distance;
         // float rayDistance = distance;
         // distance = cos(fov) * rayDistance;
+       /// printf("d :%f\n", distance);
+       if(!distance)
+            distance = 0.000001;
+        
         double  distanceprojectplane =  ((WIDTH) / 2) / fabs(tan(M_PI / 6));
         //printf("the height is %f\n", distanceprojectplane);
         //float h = (TILESIZE / rayDistance) * distanceprojectplane;
             double h = ((double)TILESIZE / distance) * distanceprojectplane;
+            //printf("h : %f\n", h);
             double real_height = h;
         if(h > HEIGHT)
             h = HEIGHT;
             double i1 = ((HEIGHT / 2) - (h / 2));
+            // if(!i1)
+            //     i1 = 50;
             double down = h  + i1;
         double up = i1;
-            while (up > 0)
-            {
-            my_mlx_pixel_put(&map->data, jj, up, 0x236F21);
-            up--;
-            }
-        while (i1 <= down)
+        while (up > 0)
         {
+        my_mlx_pixel_put(&map->data, jj, up, 0x87CEEB);
+        up--;
+        }
+            ///printf("the down is %f and the up is %f\n", down, i1);
+        while (i1 < down)
+        {
+           // printf("i1 %f down %f\n", i1, down);
                 texture_color = get_texture(map, i1, i, real_height);
                 my_mlx_pixel_put(&map->data, jj, i1, texture_color);
+                //usleep(50000);
             i1++;
         }
+       // puts("heere");
         while (down < HEIGHT)
         {
             my_mlx_pixel_put(&map->data, jj, down, 0x236F21);

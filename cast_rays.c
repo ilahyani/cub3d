@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:21:15 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/27 16:09:06 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/27 16:19:58 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	cast_rays(t_map *map)
 	//  else
 	create_texture(map);
 	render3d(map, rays);
+		
 	return (0);
 }
 

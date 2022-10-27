@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 10:21:57 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/27 12:48:23 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:59:15 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,28 @@ int	get_texture(t_map *map, double y, int index, double wallheight)
 	double		offsetx;
 	double		offsety;
 	int			*buffer;
+	int color = 0;
 	t_texture	tex;
 
-	tex = choose_texture(map, index);
-	if (map->ray[index].direction == 'V')
-		offsetx = (map->ray[index].y / (double) TILESIZE);
-	else
-		offsetx = (map->ray[index].x / (double) TILESIZE);
-	offsetx -= (int) offsetx;
-	offsetx *= tex.width;
-	offsety = (y + (wallheight / 2 - HEIGHT / 2)) * (tex.height / wallheight);
-	offsety = (int) offsety;
-	offsety *= tex.width;
-	buffer = (int *)tex.img.addr;
-	return (buffer[(int)offsety + (int)offsetx]);
+	// if (y)
+	// {
+		tex = choose_texture(map, index);
+		if (map->ray[index].direction == 'V')
+			offsetx = (map->ray[index].y / (double) TILESIZE);
+		else
+			offsetx = (map->ray[index].x / (double) TILESIZE);
+		offsetx -= (int) offsetx;
+		offsetx *= tex.width;
+		offsety = (y + (wallheight / 2 - HEIGHT / 2)) * (tex.height / wallheight);
+		offsety = (int) offsety;
+		offsety *= tex.width;
+		buffer = (int *)tex.img.addr;
+		// if ((unsigned long)(offsety + offsetx) <= sizeof(buffer) / 4)
+		// printf("the offx %f offy %f\n", offsetx, offsety);
+		color = buffer[(int)offsety + (int)offsetx];
+		//puts("start");
+	// }
+	return (color);
 }
 
 t_texture	choose_texture(t_map *map, int ray_id)

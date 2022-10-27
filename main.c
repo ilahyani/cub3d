@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 09:02:29 by snouae            #+#    #+#             */
-/*   Updated: 2022/10/27 15:58:36 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/27 16:18:42 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ int	main(int ac, char **av)
 	i = 0;
 	while (map.m[i])
 		printf("%s\n", map.m[i++]);
+		
 	if (!ft_check_path(&map))
 	{
 		printf("The map is incorrect, reconfigure it !!!!!!!!!!!");
 		return (1);
 	}
+		
 	map.key_w = 0;
 	map.key_s = 0;
 	map.key_A = 0;
