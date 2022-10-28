@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:21:15 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/28 17:55:09 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/28 18:17:11 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,7 @@ t_pos	castray(t_map *map, double rayangle, int i, int flag)
 	t_pos	h_pos;
 	t_pos	v_pos;
 	t_pos	pos;
-	int k;
-	int j;
 
-	// printf("%f\n", rayangle);
-	k = 0;
-	j = 0;
 	h_pos = get_horizontal_intersect(map, rayangle);
 	v_pos = get_vertical_intersect(map, rayangle);
 	// printf("h_x: %f, h_y: %f\n", h_pos.x, h_pos.y);
