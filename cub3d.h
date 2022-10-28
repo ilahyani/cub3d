@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/27 16:11:49 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/28 15:28:08 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@
 # define S 1
 # define A 0
 # define D 2
-#define sizemap 0.25
+# define sizemap 0.25
 # define TEXTURES 4
+# define WALL 1
+# define DOOR 0
 
 typedef struct s_data
 {
@@ -76,6 +78,7 @@ typedef struct s_pos
 {
 	double	x;
 	double	y;
+	char	direction;
 	double	tmpx;
 	double	tmpy;
 }	t_pos;
@@ -100,6 +103,7 @@ typedef struct s_dataray
 	double distance;
 	double	angle;
 	char	direction;
+	int type;
 }	t_dataray;
 
 

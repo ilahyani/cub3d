@@ -6,7 +6,7 @@
 #    By: snouae <snouae@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 17:52:47 by snouae            #+#    #+#              #
-#    Updated: 2022/10/27 15:53:57 by snouae           ###   ########.fr        #
+#    Updated: 2022/10/28 16:13:07 by snouae           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRC = main.c\
 	mouse_move.c
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -Ofast -g
+FLAGS = -Wall -Wextra -Werror
 MLXFLAGS = -framework OpenGL -framework Appkit
 RM = rm  -rf
 

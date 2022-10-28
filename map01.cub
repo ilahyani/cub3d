@@ -1,54 +1,11 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 NO ./texture/path_to_the_south_texturea                                                       
-
-SO    ./texture/path_to_the_south_texturea   
-
-      WE ./texture/path_to_the_west_textureC 
-                                
-                                   
+SO    ./texture/path_to_the_south_texturea 
+WE ./texture/path_to_the_west_textureC                                                         
 EA        ./texture/path_to_the_west_textureD
-
-      F 55      ,  11 ,  200
-
-      C 225  , 30 , 35 
-              11111111111111
-              1000000N000001
-              10000000000001
-              10000000000001
-              11111111111111
-
-
-
-
-
-
-
-
-
-
-
-
-            
-
-
-
-
-
+F 55      ,  11 ,  200
+C 225  , 30 , 35 
+11111111111111
+10000000000001
+10D000D000001
+1N000000000001
+11111111111111

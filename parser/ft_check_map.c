@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 14:40:16 by snouae            #+#    #+#             */
-/*   Updated: 2022/10/23 20:00:13 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/28 17:55:00 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	caracter_exit(t_map *map, int i, int *j, int *c_player)
 		if(*c_player > 1)
 			return (0);
 	}
-	if (map->m[i][*j] != '1' && map->m[i][*j] != '0' && map->m[i][*j] != 'N'
+	if (map->m[i][*j] != 'D' && map->m[i][*j] != '1' && map->m[i][*j] != '0' && map->m[i][*j] != 'N'
 	&& map->m[i][*j] != 'S' && map->m[i][*j] != 'E' && map->m[i][*j] != 'W'
 	&& map->m[i][*j] != ' ')
 		return (0);

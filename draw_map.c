@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:57:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/27 16:18:59 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/28 18:09:24 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ int keyrealeased(int key, t_map *map)
 }
 int	deal_key(t_map *map)
 {
+	//printf("the angal %f\n", map->pa);
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
 	if(map->key_left == 1)
 	{
@@ -148,8 +149,8 @@ int	deal_key(t_map *map)
 		if (map->pa > 2 * PI)
 			map->pa -= 2 * PI;
 	}
-	pdx = cos(map->pa) * 1;
-	pdy = sin(map->pa) * 1;
+	pdx = cos(map->pa) * 3;
+	pdy = sin(map->pa) * 3;
 	if (map->key_s == 1)
 	{
 		//int check = 0;
@@ -168,12 +169,22 @@ int	deal_key(t_map *map)
 		// 	check = 1;
 		// }
 		// !check && (fabs(pos.x - map->px) <  1 && fabs(pos.y - map->py) < 1)
-		
+		//printf("the pos is %c\n", pos.direction);
 		if( Distance(map->px, map->py, pos.x, pos.y) > 3)
 		{
 			map->py -= pdy;
 			map->px -= pdx;
 		}
+		// else if(pos.direction == 'V')
+		// {
+		// 	puts("here1");
+		// 	map->py -= pdy;
+		// }
+		// else if(pos.direction == 'H')
+		// {
+		// 		puts("here2");
+		// 		map->px -= pdx;
+		// }
 	}
 	if (map->key_w == 1)
 	{
@@ -188,11 +199,15 @@ int	deal_key(t_map *map)
 		// }
 		//if(map)
 		//printf("x %f and y %f\n", map->px, map->py);
-		if(fabs(floor(map->ray[WIDTH / 2].x - map->px)) > 2 || fabs(floor(map->ray[WIDTH / 2].y - map->py)) > 2)
+		if( Distance(map->px, map->py, map->ray[WIDTH / 2].x, map->ray[WIDTH / 2].y) > 3)
 		{
 			map->py += pdy;
 			map->px += pdx;
 		}
+		// else if(map->ray[WIDTH / 2].direction == 'V')
+		// 			map->py += pdy;
+		// else if(map->ray[WIDTH / 2].direction == 'H')
+		// 			map->px += pdx;
 	}
 	pdx = cos(map->pa - M_PI_2) * 1;
 	pdy = sin(map->pa - M_PI_2) * 1;;

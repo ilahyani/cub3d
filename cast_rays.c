@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:21:15 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/27 16:19:58 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/28 17:55:09 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,62 @@ t_pos	castray(t_map *map, double rayangle, int i, int flag)
 	t_pos	h_pos;
 	t_pos	v_pos;
 	t_pos	pos;
+	int k;
+	int j;
 
 	// printf("%f\n", rayangle);
+	k = 0;
+	j = 0;
 	h_pos = get_horizontal_intersect(map, rayangle);
 	v_pos = get_vertical_intersect(map, rayangle);
 	// printf("h_x: %f, h_y: %f\n", h_pos.x, h_pos.y);
 	// printf("v_x: %f, v_y: %f\n", v_pos.x, v_pos.y);
 	pos = get_shortest_dist(map, h_pos, v_pos);
-	if(!flag)
-		drawline(map, map->px, map->py, pos.x, pos.y);
 	if(flag == 1)
 	{
 		map->ray[i].distance = Distance(map->px, map->py, pos.x, pos.y) * cos(rayangle - map->pa);
 		map->ray[i].x = pos.x;
 		map->ray[i].y = pos.y;
 		map->ray[i].angle = rayangle;
+		map->ray[i].type = WALL;
+		// k = floor(pos.y / TILESIZE + map->top);
+		// j = floor( pos.x / TILESIZE);
+		// if(map->m[k][i] == '1')
+		// 	{
+		// 		printf("i : %d j : %d\n",(int)pos.y / TILESIZE + map->top , (int)pos.x / TILESIZE);
+		// 		printf("i : %f j : %f\n",pos.y / TILESIZE + map->top , pos.x / TILESIZE);
+		
+		// 		printf("the c is %c\n", map->m[(int)pos.y / TILESIZE + map->top][(int)pos.x / TILESIZE]);
+		// 		map->ray[i].type = WALL;
+		// 	}
+		// // 	{
+		// // 		printf("the c is %c\n", map->m[(int)pos.y / TILESIZE + map->top][(int)pos.x / TILESIZE]);
+		// // 	}
+		// // k = floor(pos.y / TILESIZE + map->top);
+		// // j = floor( pos.x / TILESIZE);
+		// if(map->m[k][i] == 'D')
+		// 	{
+		// 		printf("i : %d j : %d\n",(int)pos.y / TILESIZE + map->top , (int)pos.x / TILESIZE);
+		// 		printf("i : %f j : %f\n",pos.y / TILESIZE + map->top , pos.x / TILESIZE);
+		//  		printf("the c is %c\n", map->m[(int)pos.y / TILESIZE + map->top][(int)pos.x / TILESIZE]);
+		//  		map->ray[i].type = DOOR;
+				
+		// 	}
 		if (pos.x == h_pos.x && pos.y == h_pos.y)
+		{
 			map->ray[i].direction = 'H';
+			pos.direction = 'H';
+		}
 		else
+		{
 			map->ray[i].direction = 'V';
+			pos.direction = 'V';
+		}
 	}
+			if (pos.x == h_pos.x && pos.y == h_pos.y)
+				pos.direction = 'H';
+			else
+				pos.direction = 'V';
 	return (pos);
 	// printf("x: %f, y: %f\n", pos.x, pos.y);
 	//puts("heeeeer");
@@ -119,12 +155,12 @@ int	find_wall_hit(t_pos *pos, t_ray ray, t_map *map)
 			pos->tmpy--;
 		else if (ray.direction == 'V' && ray.is_left)
 			pos->tmpx--;
-		if (pos->tmpy > (map->rows) * TILESIZE
+		if (pos->tmpy > (map->rows - 1) * TILESIZE
 			|| pos->tmpy < 0
 			|| pos->tmpx > map->big_width * TILESIZE
 			|| pos->tmpx < 0
 			|| map->m[(int)pos->tmpy / TILESIZE + map->top]
-			[(int)pos->tmpx / TILESIZE] != '0')
+			[(int)pos->tmpx / TILESIZE] == '1')
 			return (0);
 		ray.xintercept += ray.xstep;
 		ray.yintercept += ray.ystep;

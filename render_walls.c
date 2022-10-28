@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:54:19 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/27 17:39:30 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/28 18:13:00 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,7 @@ void render3d(t_map *map, int num_rays)
     int jj = 0;
     int		texture_color;
     i = 0;
-    num_rays = 0;
-    while(i < WIDTH)
+    while(i < num_rays)
     {
         double  distance = map->ray[i].distance;
         // float rayDistance = distance;
@@ -149,9 +148,14 @@ void render3d(t_map *map, int num_rays)
         while (i1 < down)
         {
            // printf("i1 %f down %f\n", i1, down);
+           if(map->ray[i].type == WALL)
+           {
                 texture_color = get_texture(map, i1, i, real_height);
                 my_mlx_pixel_put(&map->data, jj, i1, texture_color);
                 //usleep(50000);
+           }
+           else if (map->ray[i].type == DOOR)
+                 my_mlx_pixel_put(&map->data, jj, i1, 0x87EEB);
             i1++;
         }
        // puts("heere");
