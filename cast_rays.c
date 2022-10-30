@@ -6,12 +6,36 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:21:15 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/28 18:17:11 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/30 13:58:04 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+// t_door *add_ray_door(double x, double y, double d)
+// {
+// 	t_door *dor;
+// 	dor = (t_door *)malloc(sizeof(t_door));
+// 	dor->x = x;
+// 	dor->y = y;
+// 	dor->distance = d;
+// 	dor->next = NULL;
+// 	return (dor);
+// }
+// void	deletelist(t_door **head)
+// {
+// 	t_door	*current;
+// 	t_door	*next;
 
+// 	current = *head;
+// 	while (current)
+// 	{
+// 		next = current->next;
+// 		// free(current->str);
+// 		free(current);
+// 		current = next;
+// 	}
+// 	*head = NULL;
+// }
 int	cast_rays(t_map *map)
 {
 	double	rayangle;
@@ -20,18 +44,23 @@ int	cast_rays(t_map *map)
 
 	fov = 60 * (PI / 180);
 	rayangle = map->pa - (fov / 2);
+	//map->first = 0;
 	rays = -1;
 	map->ray = (t_dataray *)malloc(sizeof(t_dataray) * WIDTH);
 	while (++rays < WIDTH)
 	{
+		map->ray[rays].type = WALL;
 		castray(map, normalize_angle(rayangle), rays , 1);
 		rayangle += fov / WIDTH;
 	}
+		create_texture_door(map, map->path);
+		create_texture(map);
+		render3d(map, rays);
+		//deletelist(&map->door);
+		//map->first = 0;
 	// if (map->space > 0)
 	// 	jump(map, rays);
 	//  else
-	create_texture(map);
-	render3d(map, rays);
 		
 	return (0);
 }
@@ -47,8 +76,8 @@ t_pos	castray(t_map *map, double rayangle, int i, int flag)
 	t_pos	v_pos;
 	t_pos	pos;
 
-	h_pos = get_horizontal_intersect(map, rayangle);
-	v_pos = get_vertical_intersect(map, rayangle);
+	h_pos = get_horizontal_intersect(map, rayangle, i);
+	v_pos = get_vertical_intersect(map, rayangle, i);
 	// printf("h_x: %f, h_y: %f\n", h_pos.x, h_pos.y);
 	// printf("v_x: %f, v_y: %f\n", v_pos.x, v_pos.y);
 	pos = get_shortest_dist(map, h_pos, v_pos);
@@ -58,7 +87,11 @@ t_pos	castray(t_map *map, double rayangle, int i, int flag)
 		map->ray[i].x = pos.x;
 		map->ray[i].y = pos.y;
 		map->ray[i].angle = rayangle;
-		map->ray[i].type = WALL;
+		map->ray[i].tmpx = pos.tmpx;
+		map->ray[i].tmpy = pos.tmpy;
+		//map->ray[i].ray  
+		
+		//map->ray[i].type = WALL;
 		// k = floor(pos.y / TILESIZE + map->top);
 		// j = floor( pos.x / TILESIZE);
 		// if(map->m[k][i] == '1')
@@ -138,8 +171,9 @@ void	set_ray_direction(double rayangle, t_ray *ray)
 		ray->is_left = 0;
 }
 
-int	find_wall_hit(t_pos *pos, t_ray ray, t_map *map)
+int	find_wall_hit(t_pos *pos, t_ray ray, t_map *map, double rayangle, int i)
 {
+	(void)rayangle;
 	while (69)
 	{
 		pos->x = ray.xintercept;
@@ -150,20 +184,28 @@ int	find_wall_hit(t_pos *pos, t_ray ray, t_map *map)
 			pos->tmpy--;
 		else if (ray.direction == 'V' && ray.is_left)
 			pos->tmpx--;
+		//puts("start");
 		if (pos->tmpy > (map->rows - 1) * TILESIZE
 			|| pos->tmpy < 0
 			|| pos->tmpx > map->big_width * TILESIZE
-			|| pos->tmpx < 0
-			|| map->m[(int)pos->tmpy / TILESIZE + map->top]
-			[(int)pos->tmpx / TILESIZE] == '1')
+			|| pos->tmpx < 0)
 			return (0);
+		if( map->m[(int)pos->tmpy / TILESIZE + map->top]
+			[(int)pos->tmpx / TILESIZE] == 'D')
+			map->ray[i].type = DOOR;
+		if(map->m[(int)pos->tmpy / TILESIZE + map->top]
+			[(int)pos->tmpx / TILESIZE] == '1' 
+			|| map->m[(int)pos->tmpy / TILESIZE + map->top]
+			[(int)pos->tmpx / TILESIZE] == 'D')
+			return (0);
+		//puts("end");
 		ray.xintercept += ray.xstep;
 		ray.yintercept += ray.ystep;
 	}
 	return (0);
 }
 
-t_pos	get_vertical_intersect(t_map *map, double rayangle)
+t_pos	get_vertical_intersect(t_map *map, double rayangle, int i)
 {
 	t_pos	pos;
 	t_ray	ray;
@@ -182,11 +224,11 @@ t_pos	get_vertical_intersect(t_map *map, double rayangle)
 	else if (ray.is_down && ray.ystep < 0)
 			ray.ystep *= -1;
 	ray.direction = 'V';
-	find_wall_hit(&pos, ray, map);
+	find_wall_hit(&pos, ray, map, rayangle, i);
 	return (pos);
 }
 
-t_pos	get_horizontal_intersect(t_map *map, double rayangle)
+t_pos	get_horizontal_intersect(t_map *map, double rayangle, int i)
 {
 	t_pos	pos;
 	t_ray	ray;
@@ -205,7 +247,7 @@ t_pos	get_horizontal_intersect(t_map *map, double rayangle)
 	else if (ray.is_right && ray.xstep < 0)
 			ray.xstep *= -1;
 	ray.direction = 'H';
-	find_wall_hit(&pos, ray, map);
+	find_wall_hit(&pos, ray, map, rayangle, i);
 	return (pos);
 }
 

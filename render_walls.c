@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:54:19 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/28 18:13:00 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/30 16:43:24 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void jump(t_map *map, int num_rays)
         double up = i1;
         while (up > 0)
         {
-        my_mlx_pixel_put(&map->data, jj, up, 0x87CEEB);
-        up--;
+            my_mlx_pixel_put(&map->data, jj, up, 0x87CEEB);
+            up--;
         }
         while (i1 <= down)
         {
@@ -110,58 +110,59 @@ void jump(t_map *map, int num_rays)
     // }
 }
 
+int	create_rgb(int r, int g, int b)
+{
+	return (r << 16 | g << 8 | b);
+}
 
 void render3d(t_map *map, int num_rays)
 {
     int i;
     int jj = 0;
+    // t_door	*tmp;
+    //int tj = 0;
+
     int		texture_color;
     i = 0;
+	    // tmp = map->door;
     while(i < num_rays)
     {
+        //printf("the type is %d\n", map->ray[i].type);
         double  distance = map->ray[i].distance;
-        // float rayDistance = distance;
-        // distance = cos(fov) * rayDistance;
-       /// printf("d :%f\n", distance);
        if(!distance)
-            distance = 0.000001;
-        
+            distance = 0.000001;     
         double  distanceprojectplane =  ((WIDTH) / 2) / fabs(tan(M_PI / 6));
-        //printf("the height is %f\n", distanceprojectplane);
-        //float h = (TILESIZE / rayDistance) * distanceprojectplane;
             double h = ((double)TILESIZE / distance) * distanceprojectplane;
-            //printf("h : %f\n", h);
             double real_height = h;
         if(h > HEIGHT)
             h = HEIGHT;
             double i1 = ((HEIGHT / 2) - (h / 2));
-            // if(!i1)
-            //     i1 = 50;
             double down = h  + i1;
         double up = i1;
         while (up > 0)
         {
-        my_mlx_pixel_put(&map->data, jj, up, 0x87CEEB);
-        up--;
+            my_mlx_pixel_put(&map->data, jj, up, create_rgb(map->c[0], map->c[1], map->c[2]));
+            up--;
         }
-            ///printf("the down is %f and the up is %f\n", down, i1);
-        while (i1 < down)
-        {
-           // printf("i1 %f down %f\n", i1, down);
-           if(map->ray[i].type == WALL)
-           {
-                texture_color = get_texture(map, i1, i, real_height);
-                my_mlx_pixel_put(&map->data, jj, i1, texture_color);
-                //usleep(50000);
-           }
-           else if (map->ray[i].type == DOOR)
-                 my_mlx_pixel_put(&map->data, jj, i1, 0x87EEB);
-            i1++;
-        }
-       // puts("heere");
+            while (i1 < down)
+            {
+                if(map->ray[i].type == WALL)
+                {
+                    texture_color = get_texture(map, i1, i, real_height);
+                    my_mlx_pixel_put(&map->data, i, i1, texture_color);
+                }
+                else if(map->ray[i].type == DOOR)
+                {
+                    texture_color = get_texture_door(map, i1, i, real_height);
+                    my_mlx_pixel_put(&map->data, i, i1, texture_color);
+                    // texture_color = get_texture(map, i1, i, real_height);
+                    // my_mlx_pixel_put(&map->data, i, i1, texture_color);
+                }
+                i1++;
+            }
         while (down < HEIGHT)
         {
-            my_mlx_pixel_put(&map->data, jj, down, 0x236F21);
+            my_mlx_pixel_put(&map->data, jj, down, create_rgb(map->f[0], map->f[1], map->f[2]));
             down++;
         }
         jj += 1;

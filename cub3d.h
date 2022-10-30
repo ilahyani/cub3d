@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/28 15:28:08 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/30 13:57:24 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,18 @@ typedef struct s_dataray
 	double	angle;
 	char	direction;
 	int type;
+	double	tmpx;
+	double	tmpy;
 }	t_dataray;
 
-
+typedef struct s_door
+{
+	double				x;
+	double			y;
+	double				distance;
+	char	direction;
+	struct s_door	*next;
+}	t_door;
 //TODO: create a global t_game struct
 //TODO: organize map struct
 typedef struct s_map
@@ -133,9 +142,15 @@ typedef struct s_map
 	int		space;
 	int		key_right;
 	int		key_left;
-	//float	*ray;
+	int		first;
+	int 	dx;
+	int 	dy;
 	double	pa;
+	char 	*path;
+	t_door	*door;
+	t_door  *tmp_door;
 	t_texture	*textures;
+	t_texture	*door_textures;
 	t_data	data;
 	t_player player;
 	t_dataray *ray;
@@ -166,8 +181,8 @@ int		check_deal_key(int key, t_map *map);
 int		destroy_notif(void);
 t_pos	castray(t_map *map, double rayangle, int i, int flag);
 double	normalize_angle(double angle);
-t_pos	get_horizontal_intersect(t_map *map, double rayangle);
-t_pos	get_vertical_intersect(t_map *map, double rayangle);
+t_pos	get_horizontal_intersect(t_map *map, double rayangle, int i);
+t_pos	get_vertical_intersect(t_map *map, double rayangle, int i);
 t_pos	get_shortest_dist(t_map *map, t_pos h_pos, t_pos v_pos);
 void	drawline(t_map *map, double x0, double y0, double x1, double y1);
 void	ft_inti_angl_player(t_map *map);
@@ -176,10 +191,13 @@ void	render3d(t_map *map, int num_rays);
 void	ft_mini_map(t_map *map);
 float 	Distance(float x1, float y1, float x2, float y2);
 void	jump(t_map *map, int num_rays);
-int			find_wall_hit(t_pos *pos, t_ray ray, t_map *map);
+int			find_wall_hit(t_pos *pos, t_ray ray, t_map *map, double rayangle, int i);
 int			get_texture(t_map *map, double y, int index, double wallheight);
 void		create_texture(t_map *map);
 t_texture	choose_texture(t_map *map, int ray_id);
 int			mouse_move(int x, int y, void *param);
+void	ft_lstadd_back(t_door **lst, t_door *new);
+void	create_texture_door(t_map *map, char *path);
+int	get_texture_door(t_map *map, double y, int index, double wallheight);
 
 #endif

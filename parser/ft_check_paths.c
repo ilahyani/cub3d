@@ -6,12 +6,37 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 14:30:55 by snouae            #+#    #+#             */
-/*   Updated: 2022/10/28 15:18:48 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/30 16:36:37 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
+char	*ft_trim(char *s1, char c)
+{
+	int		i;
+	int		j;
+	int		k;
+	char	*str;
+
+	str = 0;
+	i = 0;
+	if (s1 != 0 && c != 0)
+	{
+		j = ft_strlen(s1);
+		while (s1[j - 1] == c && j > 0)
+			j--;
+		str = (char *)malloc((j + 1) * sizeof(char));
+		k = 0;
+		if (str)
+		{
+			while (i < j)
+				str[k++] = s1[i++];
+			str[k] = '\0';
+		}
+	}
+	return (str);
+}
 
 int	ft_valid_line(t_map *map, int *i, int *j)
 {
@@ -86,8 +111,17 @@ int	ft_valid_path(t_map *map, char *way, int *i, int *j)
 			path = ft_strjoin(path, tmp);
 			(*j)++;
 		}
-		// if(open(path, O_RDONLY) == -1)
-		// 	 	return (0);
+		path = ft_trim(path,  ' ');
+		if(open(path, O_RDONLY) == -1)
+			 	return (0);
+		if(way[0] == 'N')
+			map->textures[3].path = path;
+		else if(way[0] == 'S')
+			map->textures[0].path = path;
+		else if(way[0] == 'E')
+			map->textures[1].path = path;
+		else if(way[0] == 'W')
+			map->textures[2].path = path;
 	}
 	return (1);
 }

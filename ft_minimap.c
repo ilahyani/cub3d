@@ -1,6 +1,23 @@
 
 #include "cub3d.h"
 
+void	ft_lstadd_back(t_door **lst, t_door *new)
+{
+	t_door	*list;
+
+	if (!new)
+		return ;
+	if (!(*lst))
+	{
+		*lst = new;
+		return ;
+	}
+	list = *lst;
+	while (list->next)
+		list = list->next;
+	list->next = new;
+}
+
 static void    drawe_cub(t_map *map, int i, int j, int color)
 {
 	int	i1;
@@ -55,6 +72,8 @@ void    ft_mini_map(t_map *map)
 		{
 			if (map->m[i][j] == '1' && (i1 * DIV_CUB ) - dy <  size_minimap && (j * DIV_CUB) - dx < size_minimap)
 				drawe_cub(map, (i1 * DIV_CUB ) - dy, (j * DIV_CUB) - dx, 0x000000);
+			else if (map->m[i][j] == 'D' && (i1 * DIV_CUB ) - dy <  size_minimap && (j * DIV_CUB) - dx < size_minimap)
+				drawe_cub(map, (i1 * DIV_CUB ) - dy, (j * DIV_CUB) - dx, 0x5d2906);
 			j++;
 		}
 		i++;

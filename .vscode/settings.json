@@ -6,6 +6,7 @@
         "string_view": "c",
         "vector": "c",
         "__locale": "c",
-        "locale": "c"
+        "locale": "c",
+        "iterator": "c"
     }
 }

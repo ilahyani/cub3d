@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 10:21:57 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/27 16:59:15 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/30 14:59:32 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,6 @@ t_texture	choose_texture(t_map *map, int ray_id)
 void	create_texture(t_map *map)
 {
 	int	i;
-
-	map->textures = (t_texture *) malloc(sizeof(t_texture) * TEXTURES);
-	map->textures[1].path = "./texture/Roger.xpm";
-	map->textures[2].path = "./texture/gear5.xpm";
-	map->textures[3].path = "./texture/luffy.xpm";
-	// map->textures[1].path = "./texture/colorstone.xpm";
-	// map->textures[2].path = "./texture/purplestone.xpm";
-	// map->textures[3].path = "./texture/redbrick.xpm";
-	map->textures[0].path = "./texture/bluestone.xpm";
 	i = -1;
 	while (++i < TEXTURES)
 	{

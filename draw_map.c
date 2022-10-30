@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:57:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/28 18:09:24 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/30 16:10:36 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,10 +133,21 @@ int keyrealeased(int key, t_map *map)
 		map->key_left = 0;
 	return (0);
 }
+
 int	deal_key(t_map *map)
 {
 	//printf("the angal %f\n", map->pa);
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
+	static int count = 0;
+	if((Distance(map->px, map->py, map->ray[WIDTH / 2].x, map->ray[WIDTH / 2].y) > 35
+		&& map->m[(int)map->ray[WIDTH / 2].tmpy / TILESIZE + map->top][(int)map->ray[WIDTH / 2].tmpx / TILESIZE] == 'D'))
+		map->path = "./texture/main_door.xpm";
+			if((Distance(map->px, map->py, map->ray[WIDTH / 2].x, map->ray[WIDTH / 2].y) < 35
+		&& map->m[(int)map->ray[WIDTH / 2].tmpy / TILESIZE + map->top][(int)map->ray[WIDTH / 2].tmpx / TILESIZE] == 'D'))
+		map->path = "./texture/open_door.xpm";
+	if((Distance(map->px, map->py, map->ray[WIDTH / 2].x, map->ray[WIDTH / 2].y) < 25
+		&& map->m[(int)map->ray[WIDTH / 2].tmpy / TILESIZE + map->top][(int)map->ray[WIDTH / 2].tmpx / TILESIZE] == 'D'))
+			map->path = "./texture/open.xpm";
 	if(map->key_left == 1)
 	{
 		map->pa -= 0.1;
@@ -204,6 +215,17 @@ int	deal_key(t_map *map)
 			map->py += pdy;
 			map->px += pdx;
 		}
+		//printf("%c\n", map->m[(int)(map->ray[WIDTH / 2].tmpy / TILESIZE) + map->top][(int)(map->ray[WIDTH / 2].tmpx / TILESIZE)]);
+		if(Distance(map->px, map->py, map->ray[WIDTH / 2].x, map->ray[WIDTH / 2].y) < 5
+		  && map->m[(int)(map->ray[WIDTH / 2].tmpy / TILESIZE) + map->top][(int)(map->ray[WIDTH / 2].tmpx / TILESIZE)] == 'D')
+		{
+			map->m[(int)map->ray[WIDTH / 2].tmpy / TILESIZE + map->top][(int)map->ray[WIDTH / 2].tmpx / TILESIZE] = '0';
+			map->dy = (int)map->ray[WIDTH / 2].tmpy / TILESIZE + map->top;
+			map->dx = (int)map->ray[WIDTH / 2].tmpx / TILESIZE;
+			count++;
+		}
+		// map->ray[WIDTH / 2].y += 25;
+		// map->ray[WIDTH / 2].x += 25;
 		// else if(map->ray[WIDTH / 2].direction == 'V')
 		// 			map->py += pdy;
 		// else if(map->ray[WIDTH / 2].direction == 'H')
@@ -232,6 +254,17 @@ int	deal_key(t_map *map)
 		}
 	}
 	draw_map(map);
+	if(count && (map->key_w == 1 || map->key_s == 1))
+		count++;
+	if(count == 5)
+	{
+		count = 0;
+		map->path = "./texture/main_door.xpm";
+		//if(map->dy != 0 && map->dx != 0)
+			map->m[map->dy][map->dx] = 'D';
+		map->dx = 0;
+		map->dy = 0;
+	}
 	return (0);
 }
 void ft_inti_angl_player(t_map *map)
