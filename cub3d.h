@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/28 15:28:08 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/29 14:10:30 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,18 @@ typedef struct s_texture
 
 typedef struct s_player
 {
-	double	x;
-	double	y;
-	double	rotation_ang;
+	double	x1;
+	double	y1;
+	double	old_x1;
+	double	old_y1;
+	double	x2;
+	double	y2;
+	double	old_x2;
+	double	old_y2;
+	double	x3;
+	double	y3;
+	double	old_x3;
+	double	old_y3;
 }	t_player;
 
 typedef struct s_pos
