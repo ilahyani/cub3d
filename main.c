@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 09:02:29 by snouae            #+#    #+#             */
-/*   Updated: 2022/10/30 14:49:59 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/31 19:05:27 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int ac, char **av)
 		printf("%s\n", map.m[i++]);
 		
 	map.textures = (t_texture *) malloc(sizeof(t_texture) * TEXTURES);
+	
 	if (!ft_check_path(&map))
 	{
 		printf("The map is incorrect, reconfigure it !!!!!!!!!!!");
@@ -64,5 +65,10 @@ int	main(int ac, char **av)
 	mlx_hook(map.win_ptr, 03, (1L << 1), keyrealeased, &map);
 	//mlx_hook(map.win_ptr, 06, (1L << 1), mouse_move, &map);
 	mlx_loop(map.mlx_ptr);
+	// i = 0;
+	while (i < TEXTURES)
+		free(map.textures[i++].path);
+	free(map.textures);
+	// free(map.ray);
 	return (0);
 }

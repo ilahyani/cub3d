@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 10:21:57 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/31 09:27:45 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/10/31 20:57:47 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,36 @@
 // 	else
 // 		return (map->door_textures[3]);
 // }
-
 int	get_texture_door(t_map *map, double y, int index, double wallheight)
 {
 	double		offsetx;
 	double		offsety;
 	int			*buffer;
-	int 		color;
+	int color = 0;
 	t_texture	tex;
 
-	tex = map->door_textures[0];
-	if (map->ray[index].direction == 'V')
-		offsetx = (map->ray[index].y / (double) TILESIZE);
-	else
-		offsetx = (map->ray[index].x / (double) TILESIZE);
-	offsetx -= (int) offsetx;
-	offsetx *= tex.width;
-	offsety = (y + (wallheight / 2 - HEIGHT / 2)) * (tex.height / wallheight);
-	offsety = (int) offsety;
-	offsety *= tex.width;
-	buffer = (int *)tex.img.addr;
-	color = buffer[(int)offsety + (int)offsetx];
+	// if (y)
+	// {
+		// tex = choose_texture_door(map, index);
+		 tex = map->door_textures[0];
+		if (map->ray[index].direction == 'V')
+			offsetx = (map->ray[index].y / (double) TILESIZE);
+		else
+			offsetx = (map->ray[index].x / (double) TILESIZE);
+		offsetx -= (int) offsetx;
+		offsetx *= tex.width;
+		offsety = (y + (wallheight / 2 - HEIGHT / 2)) * (tex.height / wallheight);
+		offsety = (int) offsety;
+		offsety *= tex.width;
+		buffer = (int *)tex.img.addr;
+		// if ((unsigned long)(offsety + offsetx) <= sizeof(buffer) / 4)
+		// printf("the offx %f offy %f\n", offsetx, offsety);
+		color = buffer[(int)offsety + (int)offsetx];
+		//puts("start");
+	// }
 	return (color);
 }
+
 
 void	create_texture_door(t_map *map, char *path)
 {

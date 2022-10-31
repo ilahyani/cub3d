@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:57:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/30 16:10:36 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/31 19:07:36 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,45 +58,12 @@ int	destroy_notif(void)
 
 void	ft_pixel(t_map *map)
 {
-	// int i;
-	// int j;
-	// int i1;
-
-	// i = map->top, j = 0, i1 = 0;
-	// while (i < map->rows)
-	// {
-	// 	j = 0;
-	// 	while (j < map->big_width)
-	// 	{
-	// 		 if(map->m[i][j] == '1')
-	// 			draw_cub(map, i1 ,j, 0x236F21);
-	// 		else if (map->m[i][j] != ' ')
-	// 			draw_cub(map, i1 ,j, 0x00FFFF);
-	// 		j++;
-	// 	}
-	// 	i++;
-	// 	i1++;
-	// }
-	//draw_cub(map, map->px ,map->py, 0x7CFC00);
-	// i = 0, j = 0, i1 = 0;
-	// while (i < HEIGHT / 20)
-	// {
-	// 	j = 0;
-	// 	while (j < WIDTH / 20)
-	// 	{ 
-	// 		draw_cub(map, i1 ,j, 0x87CEEB);
-	// 		j++;
-	// 	}
-	// 	i++;
-	// 	i1++;
-	// }
 	cast_rays(map);
 	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->data.img, 0, 0);
 }
 
 int check_deal_key(int key, t_map *map)
 {
-	// printf("the key is %d\n", key);
 	if (key == 53)
 		destroy_notif();
 	if(key == W)
@@ -113,7 +80,6 @@ int check_deal_key(int key, t_map *map)
 		map->key_right = 1;
 	else if (key == 123)
 		map->key_left = 1;
-	//deal_key(map);
 	return (0);
 }
 
@@ -138,6 +104,8 @@ int	deal_key(t_map *map)
 {
 	//printf("the angal %f\n", map->pa);
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
+	//mlx_destroy_image(map->mlx_ptr,  map->data.img);
+
 	static int count = 0;
 	if((Distance(map->px, map->py, map->ray[WIDTH / 2].x, map->ray[WIDTH / 2].y) > 35
 		&& map->m[(int)map->ray[WIDTH / 2].tmpy / TILESIZE + map->top][(int)map->ray[WIDTH / 2].tmpx / TILESIZE] == 'D'))
@@ -277,8 +245,8 @@ void ft_inti_angl_player(t_map *map)
 		map->pa = PI;
 	else if (map->view == 'E')
 		map->pa = 0;
-	pdx = cos(map->pa) * 5;
-	pdy = sin(map->pa) * 5;
+	pdx = cos(map->pa) * 3;
+	pdy = sin(map->pa) * 3;
 }
 
 void	draw_map(t_map *map)

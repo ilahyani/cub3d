@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/31 18:26:26 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/30 20:48:14 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,13 @@ typedef struct s_texture
 	char	direction;
 }	t_texture;
 
+typedef struct s_player
+{
+	double	x;
+	double	y;
+	double	rotation_ang;
+}	t_player;
+
 typedef struct s_pos
 {
 	double	x;
@@ -109,22 +116,6 @@ typedef struct s_door
 	char	direction;
 	struct s_door	*next;
 }	t_door;
-
-typedef struct s_player
-{
-	double	x1;
-	double	y1;
-	double	old_x1;
-	double	old_y1;
-	double	x2;
-	double	y2;
-	double	old_x2;
-	double	old_y2;
-	double	x3;
-	double	y3;
-	double	old_x3;
-	double	old_y3;
-}	t_player;
 //TODO: create a global t_game struct
 //TODO: organize map struct
 typedef struct s_map
