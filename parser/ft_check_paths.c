@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 14:30:55 by snouae            #+#    #+#             */
-/*   Updated: 2022/10/30 16:36:37 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/31 01:09:52 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char	*ft_trim(char *s1, char c)
 			str[k] = '\0';
 		}
 	}
+	free(s1);
+	s1 = NULL;
 	return (str);
 }
 
@@ -77,12 +79,14 @@ int check_colors(t_map *map, char *way, int *i, int *j)
 				map->f[k++] = ft_atoi (nbr);
 			else if (!ft_strcmp("C", way))
 				map->c[k++] = ft_atoi (nbr);
+				free(nbr);
+				nbr = NULL;
 			if(k > 3)
 				return (0);
-			nbr = NULL;
 		}
 		(*j)++;
 	}
+	free(tmp);
 	if(k < 3 || map->m[*i][*j - 1] == ',')
 		return (0);
 	return (1);
@@ -93,7 +97,6 @@ int	ft_valid_path(t_map *map, char *way, int *i, int *j)
 	char *path;
 	char *tmp;
 
-	tmp = (char *)malloc(sizeof(char) * 2);
 	path = NULL;
 		*j += skip_spaces(&map->m[*i][*j]);
 	if(!*j && *i > map->top)
@@ -105,6 +108,7 @@ int	ft_valid_path(t_map *map, char *way, int *i, int *j)
 	}
 	else
 	{
+		tmp = (char *)malloc(sizeof(char) * 2);
 		while (map->m[*i][*j])
 		{
 			tmp[0] = map->m[*i][*j];
@@ -122,6 +126,7 @@ int	ft_valid_path(t_map *map, char *way, int *i, int *j)
 			map->textures[1].path = path;
 		else if(way[0] == 'W')
 			map->textures[2].path = path;
+		free(tmp);
 	}
 	return (1);
 }
@@ -163,6 +168,9 @@ int path_exit(t_map *map, char *way)
 		i++;
 	}
 	map->check = 0;
+	// printf("the count is %d\n", c_player);
+	// if(!map->top && !c_player)
+	// 	return (0);
 	if(c != 1)
 		return (0);
 	return (1);

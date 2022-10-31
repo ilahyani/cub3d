@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 14:40:16 by snouae            #+#    #+#             */
-/*   Updated: 2022/10/30 16:23:09 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/30 23:14:32 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int ft_handle_map(t_map *map, int i, int *j, int *c_player)
 		
 		if(map->top && i >= map->top)
 		{
+			
 			if(map->big_width < ft_strlen(map->m[i]))
 				map->big_width = ft_strlen(map->m[i]);
 			*j = skip_spaces(map->m[i]);

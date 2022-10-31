@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 10:21:57 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/30 14:59:32 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/30 23:24:23 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,14 @@ void	create_texture(t_map *map)
 	i = -1;
 	while (++i < TEXTURES)
 	{
+		//printf("the path is %s\n", map->textures[i].path);
 		map->textures[i].img.img = mlx_xpm_file_to_image(map->mlx_ptr,
 				map->textures[i].path,
 				&map->textures[i].width,
 				&map->textures[i].height);
 		if (!map->textures[i].img.img)
 		{
-			printf("Error Reading textures\n GAME CLOSED\n");
+			printf("Error Reading. textures\n GAME CLOSED\n");
 			exit(EXIT_FAILURE);
 		}
 		map->textures[i].img.addr = mlx_get_data_addr(map->textures[i].img.img,
