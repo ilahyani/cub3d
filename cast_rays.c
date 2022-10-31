@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:21:15 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/30 13:58:04 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/31 18:16:42 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 // 	}
 // 	*head = NULL;
 // }
+int check = 0;
+int checkv = 0;
+int checkh = 0;
 int	cast_rays(t_map *map)
 {
 	double	rayangle;
@@ -49,6 +52,9 @@ int	cast_rays(t_map *map)
 	map->ray = (t_dataray *)malloc(sizeof(t_dataray) * WIDTH);
 	while (++rays < WIDTH)
 	{
+		 check = 0;
+		checkh = 0;
+		checkv = 0;
 		map->ray[rays].type = WALL;
 		castray(map, normalize_angle(rayangle), rays , 1);
 		rayangle += fov / WIDTH;
@@ -89,6 +95,8 @@ t_pos	castray(t_map *map, double rayangle, int i, int flag)
 		map->ray[i].angle = rayangle;
 		map->ray[i].tmpx = pos.tmpx;
 		map->ray[i].tmpy = pos.tmpy;
+		if(check == 1)
+			map->ray[i].type = DOOR;
 		//map->ray[i].ray  
 		
 		//map->ray[i].type = WALL;
@@ -146,8 +154,12 @@ t_pos	get_shortest_dist(t_map *map, t_pos h_pos, t_pos v_pos)
 	h_dist = sqrt(pow(map->px - h_pos.x, 2) + pow(map->py - h_pos.y, 2));
 	// printf("map->px %f | map->py %f\n", map->px, map->py);
 	// printf("v_dist %f | h_dist %f\n", v_dist, h_dist);
+	check = checkv;
 	if (v_dist - h_dist >= 0)
+	{
+		check = checkh;
 		return (h_pos);
+	}
 	return (v_pos);
 }
 
@@ -174,6 +186,7 @@ void	set_ray_direction(double rayangle, t_ray *ray)
 int	find_wall_hit(t_pos *pos, t_ray ray, t_map *map, double rayangle, int i)
 {
 	(void)rayangle;
+	(void)i;
 	while (69)
 	{
 		pos->x = ray.xintercept;
@@ -190,9 +203,15 @@ int	find_wall_hit(t_pos *pos, t_ray ray, t_map *map, double rayangle, int i)
 			|| pos->tmpx > map->big_width * TILESIZE
 			|| pos->tmpx < 0)
 			return (0);
-		if( map->m[(int)pos->tmpy / TILESIZE + map->top]
+		if( map->m[(int)pos->tmpy  / TILESIZE + map->top]
 			[(int)pos->tmpx / TILESIZE] == 'D')
-			map->ray[i].type = DOOR;
+			{
+				// printf("tab[%d][%d]\n", (int)pos->tmpy  / TILESIZE + map->top, (int)pos->tmpx / TILESIZE);
+				if (ray.direction == 'H')
+					checkh = 1;
+				else
+					checkv = 1;
+			}
 		if(map->m[(int)pos->tmpy / TILESIZE + map->top]
 			[(int)pos->tmpx / TILESIZE] == '1' 
 			|| map->m[(int)pos->tmpy / TILESIZE + map->top]
