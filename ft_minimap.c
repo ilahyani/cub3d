@@ -37,6 +37,31 @@ static void    drawe_cub(t_map *map, int i, int j, int color)
 	}
 }
 
+void	draw_player(t_map *map)
+{
+	double		x;
+	double		y;
+	t_player	p;
+
+	x = size_minimap / 2;
+	y = (size_minimap + 1) / 2;
+	p.old_x1 = x;
+	p.old_y1 = y;
+	p.old_x2 = size_minimap / 2 + 5;
+	p.old_y2 = size_minimap / 2 - 10;
+	p.old_x3 = size_minimap / 2 - 5;
+	p.old_y3 = size_minimap / 2 - 10;
+	p.x1 = (p.old_x1 - x) * sin(map->pa) + (p.old_y1 - y) * cos(map->pa) + x;
+	p.y1 = (x - p.old_x1) * cos(map->pa) + (p.old_y1 - y) * sin(map->pa) + y;
+	p.x2 = (p.old_x2 - x) * sin(map->pa) + (p.old_y2 - y) * cos(map->pa) + x;
+	p.y2 = (x - p.old_x2) * cos(map->pa) + (p.old_y2 - y) * sin(map->pa) + y;
+	p.x3 = (p.old_x3 - x) * sin(map->pa) + (p.old_y3 - y) * cos(map->pa) + x;
+	p.y3 = (x - p.old_x3) * cos(map->pa) + (p.old_y3 - y) * sin(map->pa) + y;
+	drawline(map, p.x1, p.y1, p.x2, p.y2);
+	drawline(map, p.x3, p.y3, p.x2, p.y2);
+	drawline(map, p.x3, p.y3, p.x1, p.y1);
+}
+
 void    ft_mini_map(t_map *map)
 {
 	int	i;
@@ -45,13 +70,14 @@ void    ft_mini_map(t_map *map)
 	j = 0;
 	float x;
 	float y;
-	float rx;
-	float ry;
 	x = size_minimap / 2;
 	y = (size_minimap + 1) / 2;
-	rx = cos(map->pa) * 15 + x;
-	ry = sin(map->pa) * 15 + y;
-	drawline(map, x, y, rx, ry);
+	// float rx;
+	// float ry;
+	// rx = cos(map->pa) * 15 + x;
+	// ry = sin(map->pa) * 15 + y;
+	// drawline(map, x, y, rx, ry);
+	draw_player(map);
 	while (j < size_minimap)
 	{
 		my_mlx_pixel_put(&map->data,j, i, 0x000000);
