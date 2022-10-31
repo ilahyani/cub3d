@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:21:15 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/31 17:47:43 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/31 19:53:02 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,14 @@ int	cast_rays(t_map *map)
 		create_texture(map);
 		render3d(map, rays);
 		free(map->ray);
+		free(map->door_textures);
+		//free(map->textures);
 		//deletelist(&map->door);
 		//map->first = 0;
 	// if (map->space > 0)
 	// 	jump(map, rays);
 	//  else
-		
+
 	return (0);
 }
 
@@ -99,8 +101,8 @@ t_pos	castray(t_map *map, double rayangle, int i, int flag)
 		map->ray[i].tmpy = pos.tmpy;
 		if(check == 1)
 			map->ray[i].type = DOOR;
-		//map->ray[i].ray  
-		
+		//map->ray[i].ray
+
 		//map->ray[i].type = WALL;
 		// k = floor(pos.y / TILESIZE + map->top);
 		// j = floor( pos.x / TILESIZE);
@@ -108,7 +110,7 @@ t_pos	castray(t_map *map, double rayangle, int i, int flag)
 		// 	{
 		// 		printf("i : %d j : %d\n",(int)pos.y / TILESIZE + map->top , (int)pos.x / TILESIZE);
 		// 		printf("i : %f j : %f\n",pos.y / TILESIZE + map->top , pos.x / TILESIZE);
-		
+
 		// 		printf("the c is %c\n", map->m[(int)pos.y / TILESIZE + map->top][(int)pos.x / TILESIZE]);
 		// 		map->ray[i].type = WALL;
 		// 	}
@@ -123,7 +125,7 @@ t_pos	castray(t_map *map, double rayangle, int i, int flag)
 		// 		printf("i : %f j : %f\n",pos.y / TILESIZE + map->top , pos.x / TILESIZE);
 		//  		printf("the c is %c\n", map->m[(int)pos.y / TILESIZE + map->top][(int)pos.x / TILESIZE]);
 		//  		map->ray[i].type = DOOR;
-				
+
 		// 	}
 		if (pos.x == h_pos.x && pos.y == h_pos.y)
 		{
@@ -213,9 +215,11 @@ int	find_wall_hit(t_pos *pos, t_ray ray, t_map *map, double rayangle, int i)
 					checkv = 1;
 			}
 		if(map->m[(int)pos->tmpy / TILESIZE + map->top]
-			[(int)pos->tmpx / TILESIZE] == '1' 
+			[(int)pos->tmpx / TILESIZE] == '1'
 			|| map->m[(int)pos->tmpy / TILESIZE + map->top]
-			[(int)pos->tmpx / TILESIZE] == 'D')
+			[(int)pos->tmpx / TILESIZE] == 'D'
+			|| map->m[(int)pos->tmpy / TILESIZE + map->top]
+			[(int)pos->tmpx / TILESIZE] != '0')
 			return (0);
 		//puts("end");
 		ray.xintercept += ray.xstep;

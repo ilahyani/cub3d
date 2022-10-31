@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:57:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/31 17:33:47 by snouae           ###   ########.fr       */
+/*   Updated: 2022/10/31 19:07:36 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,7 @@ int	destroy_notif(void)
 
 void	ft_pixel(t_map *map)
 {
-
-	
 	cast_rays(map);
-	//mlx_destroy_image(map->mlx_ptr,  map->image);
 	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->data.img, 0, 0);
 }
 
@@ -107,6 +104,7 @@ int	deal_key(t_map *map)
 {
 	//printf("the angal %f\n", map->pa);
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
+	//mlx_destroy_image(map->mlx_ptr,  map->data.img);
 
 	static int count = 0;
 	if((Distance(map->px, map->py, map->ray[WIDTH / 2].x, map->ray[WIDTH / 2].y) > 35
