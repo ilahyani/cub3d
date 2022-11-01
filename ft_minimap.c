@@ -1,23 +1,6 @@
 
 #include "cub3d.h"
 
-void	ft_lstadd_back(t_door **lst, t_door *new)
-{
-	t_door	*list;
-
-	if (!new)
-		return ;
-	if (!(*lst))
-	{
-		*lst = new;
-		return ;
-	}
-	list = *lst;
-	while (list->next)
-		list = list->next;
-	list->next = new;
-}
-
 static void    drawe_cub(t_map *map, int i, int j, int color)
 {
 	int	i1;
@@ -29,7 +12,7 @@ static void    drawe_cub(t_map *map, int i, int j, int color)
 		j1 = j;
 		while (j1 < j + DIV_CUB)
 		{
-			if(j1 < size_minimap && i1 < size_minimap)
+			if(j1 < SIZE_MINIMAP && i1 < SIZE_MINIMAP)
 				my_mlx_pixel_put(&map->data, j1, i1, color);
 			j1++;
 		}
@@ -41,18 +24,18 @@ void    ft_mini_map(t_map *map)
 {
 	int	i;
 	int	j;
-	i = size_minimap;
+	i = SIZE_MINIMAP;
 	j = 0;
 	float x;
 	float y;
 	float rx;
 	float ry;
-	x = size_minimap / 2;
-	y = (size_minimap + 1) / 2;
+	x = SIZE_MINIMAP / 2;
+	y = (SIZE_MINIMAP + 1) / 2;
 	rx = cos(map->pa) * 15 + x;
 	ry = sin(map->pa) * 15 + y;
 	drawline(map, x, y, rx, ry);
-	while (j < size_minimap)
+	while (j < SIZE_MINIMAP)
 	{
 		my_mlx_pixel_put(&map->data,j, i, 0x000000);
 		my_mlx_pixel_put(&map->data,i, j, 0x000000);
@@ -70,9 +53,9 @@ void    ft_mini_map(t_map *map)
 		j = 0;
 		while (map->m[i][j])
 		{
-			if (map->m[i][j] == '1' && (i1 * DIV_CUB ) - dy <  size_minimap && (j * DIV_CUB) - dx < size_minimap)
+			if (map->m[i][j] == '1' && (i1 * DIV_CUB ) - dy <  SIZE_MINIMAP && (j * DIV_CUB) - dx < SIZE_MINIMAP)
 				drawe_cub(map, (i1 * DIV_CUB ) - dy, (j * DIV_CUB) - dx, 0x000000);
-			else if (map->m[i][j] == 'D' && (i1 * DIV_CUB ) - dy <  size_minimap && (j * DIV_CUB) - dx < size_minimap)
+			else if (map->m[i][j] == 'D' && (i1 * DIV_CUB ) - dy <  SIZE_MINIMAP && (j * DIV_CUB) - dx < SIZE_MINIMAP)
 				drawe_cub(map, (i1 * DIV_CUB ) - dy, (j * DIV_CUB) - dx, 0x5d2906);
 			j++;
 		}

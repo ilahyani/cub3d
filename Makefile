@@ -6,7 +6,7 @@
 #    By: snouae <snouae@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 17:52:47 by snouae            #+#    #+#              #
-#    Updated: 2022/11/01 17:03:21 by snouae           ###   ########.fr        #
+#    Updated: 2022/11/01 19:54:52 by snouae           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,18 +21,20 @@ SRC = main.c\
 	parser/ft_read.c\
 	parser/ft_check_util.c\
 	draw_map.c\
-	cast_rays.c\
 	render_walls.c\
 	ft_minimap.c\
 	wall_textures.c\
 	mouse_move.c\
 	door_texture.c\
 	ft_move_playr.c\
-	ft_open_door.c
+	ft_open_door.c\
+	raycasting.c\
+	utils.c\
+	utils_2.c
 	
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 MLXFLAGS = -framework OpenGL -framework Appkit
 RM = rm  -rf
 

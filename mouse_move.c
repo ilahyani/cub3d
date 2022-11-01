@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:38:32 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/27 15:26:38 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:12:57 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	mouse_move(int x, int y, void *param)
 	t_map	*map;
 
 	map = param;
-	// printf("x: %d | y: %d\n", x, y);
 	if (y >= 0 && y <= HEIGHT)
 	{
 		if (x < WIDTH / 2)
