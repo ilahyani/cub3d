@@ -6,13 +6,13 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 14:25:10 by snouae            #+#    #+#             */
-/*   Updated: 2022/10/31 16:59:04 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/01 15:11:04 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void ft_read(char *path, t_map *map)
+void	ft_read(char *path, t_map *map)
 {
 	char	*line;
 	int		fd;
@@ -25,10 +25,10 @@ void ft_read(char *path, t_map *map)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if(line[0] == '\n')
+		if (line[0] == '\n')
 		{
 			line[0] = ' ';
-			line[1]	= '\n';
+			line[1] = '\n';
 			line[2] = '\0';
 		}		
 		buf = ft_strjoin(buf, line);
@@ -39,4 +39,3 @@ void ft_read(char *path, t_map *map)
 	free(buf);
 	close(fd);
 }
-

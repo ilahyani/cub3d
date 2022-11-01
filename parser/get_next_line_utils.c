@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 15:21:03 by snouae            #+#    #+#             */
-/*   Updated: 2022/10/03 17:27:01 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/11/01 15:18:12 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-// size_t	ft_strlen(char *s)
-// {
-// 	size_t	i;
+int	ft_strlen(char *s)
+{
+	int	i;
 
-// 	if (!s)
-// 		return (0);
-// 	i = 0;
-// 	while (s[i])
-// 		i++;
-// 	return (i);
-// }
+	if (!s)
+		return (0);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -51,13 +51,13 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (str);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
 	if (s == NULL)
 		return (NULL);
-	while (*s != (const char)c && *s)
+	while (*s != (char)c && *s)
 		s++;
 	if (*s == (char)c)
-		return ((char *)s);
+		return (s);
 	return (NULL);
 }

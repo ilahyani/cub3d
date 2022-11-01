@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tools.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 20:28:41 by snouae            #+#    #+#             */
-/*   Updated: 2022/10/03 17:26:54 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/11/01 16:19:35 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int ft_strlen(char *s)
-{
-	int i;
-
-	i = 0;
-	while(s[i])
-		i++;
-	return (i);
-}
 
 char	*ft_strrchr(char *s, int c)
 {
@@ -56,28 +46,33 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-char *ft_strdup(char *s)
+char	*ft_strdup(char *s)
 {
-	char *new;
-	int leng;
-	int i;
+	char	*new;
+	int		leng;
+	int		i;
 
 	leng = ft_strlen(s);
 	i = 0;
 	new = (char *)malloc(sizeof(char) * (leng + 1));
 	while (s[i])
 	{
-		new[i] =  s[i];
+		new[i] = s[i];
 		i++;
 	}
 	return (new);
 }
 
-int	ft_checknumber(char c)
+int	skip(char *str)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (-1);
+	while (str[i] <= 32)
+		i++;
+	return (i);
 }
 
 int	ft_atoi(char *str)
@@ -86,27 +81,24 @@ int	ft_atoi(char *str)
 	int	s;
 
 	s = 0;
-	i = 0;
-	if(!str)
+	i = skip(str);
+	if (i == -1)
 		return (-1);
-	while (str[i] <= 32)
-		i++;
 	while (str[i] != '\0')
 	{
 		if (str[i] >= '0' && str[i] <= '9')
 			s = s * 10 + str[i] - '0';
-		else if((str[i] <= 32))
+		else if ((str[i] <= 32))
 		{
 			while (str[i] && (str[i] <= 32))
 				i++;
-			if(str[i] == '\0')
+			if (str[i] == '\0')
 				return (s);
 			return (-1);
 		}
-		else if(!(str[i] <= 32))
+		else if (!(str[i] <= 32))
 			return (-1);
 		i++;
 	}
 	return (s);
 }
-

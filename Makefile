@@ -6,7 +6,7 @@
 #    By: snouae <snouae@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 17:52:47 by snouae            #+#    #+#              #
-#    Updated: 2022/10/29 22:01:56 by snouae           ###   ########.fr        #
+#    Updated: 2022/11/01 17:03:21 by snouae           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,17 @@ SRC = main.c\
 	parser/ft_check_paths.c\
 	parser/ft_cherch.c\
 	parser/ft_read.c\
+	parser/ft_check_util.c\
 	draw_map.c\
 	cast_rays.c\
 	render_walls.c\
-	ft_minimap.c \
+	ft_minimap.c\
 	wall_textures.c\
 	mouse_move.c\
-	door_texture.c
+	door_texture.c\
+	ft_move_playr.c\
+	ft_open_door.c
+	
 
 CC = gcc
 FLAGS = -Wall -Wextra -Werror

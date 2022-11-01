@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cherch.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 14:44:41 by snouae            #+#    #+#             */
-/*   Updated: 2022/10/03 17:26:29 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/11/01 16:19:41 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,29 +35,36 @@ int	skip_spaces(char *str)
 	return (i);
 }
 
-int search_way(t_map *map, char *way, int *i, int *j)
+int	search_way(t_map *map, char *way, int *i, int *j)
 {
-	int k;
-	
+	int	k;
+
 	k = 0;
 	while (way[k] && map->m[*i][*j] && map->m[*i][*j] == way[k])
 	{
 		k++;
 		(*j)++;
 	}
-	if(cherche_symbol(map->m[*i][*j], " \t"))
+	if (cherche_symbol(map->m[*i][*j], " \t"))
 		return (1);
 	return (0);
 }
 
-int skip_lines(t_map *map, int i)
+int	skip_lines(t_map *map, int i)
 {
-	int k;
-	
+	int	k;
+
 	k = 0;
 	while (map->m[i][k] && cherche_symbol(map->m[i][k], " \t\n"))
 		k++;
-	if(!map->m[i][k])
+	if (!map->m[i][k])
+		return (1);
+	return (0);
+}
+
+int	ft_checknumber(char c)
+{
+	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
 }
