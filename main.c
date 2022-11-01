@@ -6,11 +6,17 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 09:02:29 by snouae            #+#    #+#             */
-/*   Updated: 2022/10/31 19:05:27 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/01 19:28:05 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	destroy_notif(void)
+{
+	printf("GAME CLOSED\n");
+	exit (0);
+}
 
 int	main(int ac, char **av)
 {
