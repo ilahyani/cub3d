@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 21:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/01 19:46:45 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/02 13:47:51 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	drawline(t_map *map, double x0, double y0, double x1, double y1)
+void	drawline(t_map *map, double x0, double y0, t_player p)
 {
 	t_dda	dda;
 	int		i;
 
-	dda.dx = x1 - x0;
-	dda.dy = y1 - y0;
+	dda.dx = p.x - x0;
+	dda.dy = p.y - y0;
 	if (fabs(dda.dx) > fabs(dda.dy))
 		dda.step = fabs(dda.dx);
 	else

@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 22:27:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/02 15:27:19 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/11/02 15:43:48 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ void	game_init(t_map *map)
 	map->check = 0;
 	map->key_w = 0;
 	map->key_s = 0;
-	map->key_A = 0;
-	map->key_D = 0;
+	map->key_a = 0;
+	map->key_d = 0;
 	map->key_right = 0;
 	map->key_left = 0;
 	map->dx = 0;
 	map->dy = 0;
 	map->path = "./texture/closed.xpm";
 	map->mlx_ptr = mlx_init();
-	// mlx_mouse_hide();
+	mlx_mouse_hide();
 	map->win_ptr = mlx_new_window(map->mlx_ptr, WIDTH, HEIGHT, "cub3d");
 	map->data.img = mlx_new_image(map->mlx_ptr, WIDTH, HEIGHT);
 	map->data.addr = mlx_get_data_addr(map->data.img,
