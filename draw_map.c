@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:57:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/01 16:50:00 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/02 12:27:20 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	check_deal_key(int key, t_map *map)
 	else if (key == S)
 		map->key_s = 1;
 	else if (key == A)
-		map->key_A = 1;
+		map->key_a = 1;
 	else if (key == D)
-		map->key_D = 1;
+		map->key_d = 1;
 	else if (key == 124)
 		map->key_right = 1;
 	else if (key == 123)
@@ -52,9 +52,9 @@ int	keyrealeased(int key, t_map *map)
 	else if (key == S)
 		map->key_s = 0;
 	else if (key == A)
-		map->key_A = 0;
+		map->key_a = 0;
 	else if (key == D)
-		map->key_D = 0;
+		map->key_d = 0;
 	else if (key == 124)
 		map->key_right = 0;
 	else if (key == 123)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/01 19:44:54 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/02 13:48:12 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,19 +134,19 @@ typedef struct s_map
 	int			c[3];
 	int			key_w;
 	int			key_s;
-	int			key_A;
-	int			key_D;
+	int			key_a;
+	int			key_d;
 	int			space;
 	int			key_right;
 	int			key_left;
 	int			first;
-	int     	counter;
-    char    	*nbr;
-    int     	k;
+	int			counter;
+	char		*nbr;
+	int			k;
 	int			dx;
 	int			dy;
-	double 		pdx;
-    double  	pdy;
+	double		pdx;
+	double		pdy;
 	int			check_h;
 	int			check_v;
 	int			check_hv;
@@ -190,7 +190,7 @@ t_pos		get_horizontal_intersect(t_map *map, double rayangle);
 t_pos		get_vertical_intersect(t_map *map, double rayangle);
 void		set_ray_direction(double rayangle, t_ray *ray);
 t_pos		get_shortest_dist(t_map *map, t_pos h_pos, t_pos v_pos);
-void		drawline(t_map *map, double x0, double y0, double x1, double y1);
+void		drawline(t_map *map, double x0, double y0, t_player p);
 void		ft_inti_angl_player(t_map *map);
 void		draw_cub(t_map *map, int i, int j, int color);
 void		render3d(t_map *map, int num_rays);
@@ -210,12 +210,19 @@ void		set_pos(t_pos *pos, t_ray ray);
 int			check_for_wall(t_map *map, t_pos *pos);
 void		game_init(t_map *map);
 void		clean_up(t_map *map);
-char    	*ft_trim(char *s1, char c);
-int 		ft_valid_line(t_map *map, int *i, int *j);
-int 		check_colors(t_map *map, char *way, int *i, int *j);
-int 		caracter_exit(t_map *map, int i, int *j, int *c_player);
-int 		deal_key(t_map *map);
-void    	ft_door(t_map *map);
+char		*ft_trim(char *s1, char c);
+int			ft_valid_line(t_map *map, int *i, int *j);
+int			check_colors(t_map *map, char *way, int *i, int *j);
+int			caracter_exit(t_map *map, int i, int *j, int *c_player);
+int			deal_key(t_map *map);
+void		ft_door(t_map *map);
 int			destroy_notif(void);
+void		render_wall_door(t_map *map, int i, double h, double projectplane);
+void		render_ceiling(t_map *map, int x, double y);
+void		render_floor(t_map *map, int x, double y);
+int			create_rgb(int r, int g, int b);
+void		draw_cub(t_map *map, int i, int j, int color);
+void		draw_player(t_map *map, double x, double y);
+void		draw_minimap(t_map *map, double dx, double dy);
 
 #endif

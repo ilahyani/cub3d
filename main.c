@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 09:02:29 by snouae            #+#    #+#             */
-/*   Updated: 2022/11/01 20:02:34 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/02 15:43:50 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int ac, char **av)
 	mlx_loop_hook(map.mlx_ptr, deal_key, &map);
 	mlx_hook(map.win_ptr, 02, (1L << 0), check_deal_key, &map);
 	mlx_hook(map.win_ptr, 03, (1L << 1), keyrealeased, &map);
-	// mlx_hook(map.win_ptr, 06, (1L << 1), mouse_move, &map);
+	mlx_hook(map.win_ptr, 06, (1L << 1), mouse_move, &map);
 	mlx_loop(map.mlx_ptr);
 	return (clean_up(&map), 0);
 }

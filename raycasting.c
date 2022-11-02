@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 21:37:41 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/01 20:04:23 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/02 12:25:28 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	cast_rays(t_map *map)
 		map->check_h = 0;
 		map->check_v = 0;
 		map->ray[rays].type = WALL;
-		castray(map, normalize_angle(rayangle), rays , 1);
+		castray(map, normalize_angle(rayangle), rays, 1);
 		rayangle += fov / WIDTH;
 	}
 	create_texture_door(map, map->path);
@@ -78,7 +78,7 @@ int	find_wall_hit(t_pos *pos, t_ray ray, t_map *map)
 			|| pos->tmpx > map->big_width * TILESIZE
 			|| pos->tmpx < 0)
 			return (0);
-		if (map->m[(int)pos->tmpy  / TILESIZE + map->top]
+		if (map->m[(int)pos->tmpy / TILESIZE + map->top]
 			[(int)pos->tmpx / TILESIZE] == 'D')
 		{
 			if (ray.direction == 'H')

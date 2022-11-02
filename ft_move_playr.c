@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_move_playr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:38:09 by snouae            #+#    #+#             */
-/*   Updated: 2022/11/01 19:46:45 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/02 12:27:20 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_move_a_b(t_map *map)
 
 	map->pdx = cos(map->pa - M_PI_2) * 1;
 	map->pdy = sin(map->pa - M_PI_2) * 1;
-	if (map->key_A == 1)
+	if (map->key_a == 1)
 	{
 		pos = castray(map, normalize_angle(map->pa - M_PI_2), -1, 0);
 		if (distance(map->px, map->py, pos.x, pos.y) > 3)
@@ -27,7 +27,7 @@ void	ft_move_a_b(t_map *map)
 			map->px += map->pdx;
 		}
 	}
-	if (map->key_D == 1)
+	if (map->key_d == 1)
 	{
 		pos = castray(map, normalize_angle(map->pa + M_PI_2), -1, 0);
 		if (distance(map->px, map->py, pos.x, pos.y) > 3)
