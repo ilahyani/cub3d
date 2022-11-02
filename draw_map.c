@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:57:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/02 12:27:20 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/11/02 18:07:16 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 int	check_deal_key(int key, t_map *map)
 {
 	if (key == 53)
-		destroy_notif();
+		destroy_notif(map);
 	if (key == W)
 		map->key_w = 1;
 	if (key == 49)

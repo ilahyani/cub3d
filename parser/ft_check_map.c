@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 14:40:16 by snouae            #+#    #+#             */
-/*   Updated: 2022/11/01 16:27:43 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/02 16:25:07 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,19 @@ int	check_door(t_map *map, int i, int j)
 	return (1);
 }
 
-int	ft_check_map(t_map *map, int i, int *j, int *c_player)
+int	ft_check_map(t_map *map, int i, int *j, int leng)
 {
 	if (map->m[i][*j] == '1')
 		map->rows = (i - map->top) + 1;
-	if (!caracter_exit(map, i, j, c_player))
+	if (!caracter_exit(map, i, j))
 		return (0);
 	if (map->m[i][*j] == '0')
 	{
 		if (!check_walls(map, i, j))
 			return (0);
-		if (!check_wall_broken(map, i, ft_strlen(map->m[i - 1])))
-			return (0);
 	}
+	if (!check_wall_broken(map, i, leng))
+		return (0);
 	if (map->m[i][*j] == 'D')
 	{
 		if (!check_door(map, i, *j))
@@ -92,7 +92,7 @@ int	ft_check_map(t_map *map, int i, int *j, int *c_player)
 	return (1);
 }
 
-int	ft_handle_map(t_map *map, int i, int *j, int *c_player)
+int	ft_handle_map(t_map *map, int i, int *j)
 {
 	int	leng;
 
@@ -111,7 +111,7 @@ int	ft_handle_map(t_map *map, int i, int *j, int *c_player)
 			leng = ft_strlen(map->m[i - 1]);
 		while (map->m[i][*j])
 		{
-			if (!ft_check_map(map, i, j, c_player))
+			if (!ft_check_map(map, i, j, leng))
 				return (0);
 			(*j)++;
 		}

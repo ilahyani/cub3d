@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 10:21:57 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/02 12:24:45 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/11/02 18:12:49 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	create_texture_door(t_map *map, char *path)
 	int	i;
 
 	map->door_textures = (t_texture *) malloc(sizeof(t_texture) * 1);
+	if (!map->door_textures)
+		ft_error_malloc(strerror(ENOMEM));
 	map->door_textures[0].path = path;
 	i = -1;
 	while (++i < 1)

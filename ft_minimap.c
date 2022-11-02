@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minimap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 12:19:53 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/02 15:45:47 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/11/02 18:21:56 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,19 @@ void	ft_mini_map(t_map *map)
 	int		j;
 
 	j = 0;
-	x = SIZE_MINIMAP / 2;
-	y = (SIZE_MINIMAP + 1) / 2;
+	x = MINIMAP / 2;
+	y = (MINIMAP + 1) / 2;
+	map->div_cub = floor(MINIMAP / CUBMAP);
 	draw_player(map, x, y);
-	while (j < SIZE_MINIMAP)
+	while (j < MINIMAP)
 	{
-		my_mlx_pixel_put(&map->data, j, SIZE_MINIMAP, 0x000000);
-		my_mlx_pixel_put(&map->data, SIZE_MINIMAP, j, 0x000000);
+		my_mlx_pixel_put(&map->data, j, MINIMAP, 0x000000);
+		my_mlx_pixel_put(&map->data, MINIMAP, j, 0x000000);
 		j++;
 	}
-	my_mlx_pixel_put(&map->data, j, SIZE_MINIMAP, 0x0000FF);
-	dx = ((map->px / TILESIZE) * DIV_CUB - x);
-	dy = ((map->py / TILESIZE) * DIV_CUB - y);
+	my_mlx_pixel_put(&map->data, j, MINIMAP, 0x0000FF);
+	dx = ((map->px / TILESIZE) * map->div_cub - x);
+	dy = ((map->py / TILESIZE) * map->div_cub - y);
 	draw_minimap(map, dx, dy);
 }
 
@@ -42,12 +43,12 @@ void	draw_cub(t_map *map, int i, int j, int color)
 	int	j1;
 
 	i1 = i;
-	while (i1 < i + DIV_CUB)
+	while (i1 < i + map->div_cub)
 	{
 		j1 = j;
-		while (j1 < j + DIV_CUB)
+		while (j1 < j + map->div_cub)
 		{
-			if (j1 < SIZE_MINIMAP && i1 < SIZE_MINIMAP)
+			if (j1 < MINIMAP && i1 < MINIMAP)
 				my_mlx_pixel_put(&map->data, j1, i1, color);
 			j1++;
 		}
@@ -79,12 +80,14 @@ void	draw_minimap(t_map *map, double dx, double dy)
 		j = -1;
 		while (map->m[i][++j])
 		{
-			if (map->m[i][j] == '1' && (k * DIV_CUB) - dy < SIZE_MINIMAP
-				&& (j * DIV_CUB) - dx < SIZE_MINIMAP)
-				draw_cub(map, (k * DIV_CUB) - dy, (j * DIV_CUB) - dx, 0x000000);
-			else if (map->m[i][j] == 'D' && (k * DIV_CUB) - dy < SIZE_MINIMAP
-				&& (j * DIV_CUB) - dx < SIZE_MINIMAP)
-				draw_cub(map, (k * DIV_CUB) - dy, (j * DIV_CUB) - dx, 0x5d2906);
+			if (map->m[i][j] == '1' && (k * map->div_cub) - dy < MINIMAP
+				&& (j * map->div_cub) - dx < MINIMAP)
+				draw_cub(map, (k * map->div_cub) - dy,
+					(j * map->div_cub) - dx, 0x000000);
+			else if (map->m[i][j] == 'D' && (k * map->div_cub) - dy < MINIMAP
+				&& (j * map->div_cub) - dx < MINIMAP)
+				draw_cub(map, (k * map->div_cub) - dy,
+					(j * map->div_cub) - dx, 0x5d2906);
 		}
 		i++;
 		k++;

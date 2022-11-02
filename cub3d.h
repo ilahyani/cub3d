@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/02 13:48:12 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/11/02 18:21:56 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@
 # include <unistd.h>
 # include <string.h>
 # include <math.h>
+# include <errno.h>
 # include <limits.h>
 # include "minilibx/mlx.h"
 
 # define WIDTH 1280
 # define HEIGHT 860
-# define SIZE_MINIMAP 200
+# define MINIMAP 200
 # define JUMP_SPEED 20
 # define CUBMAP 15
-# define DIV_CUB floor(SIZE_MINIMAP / CUBMAP)
 # define PI 3.14159
 # define TILESIZE 16
 # define WALL_WIDTH 1
@@ -151,7 +151,10 @@ typedef struct s_map
 	int			check_v;
 	int			check_hv;
 	char		view;
+	int			check_c;
 	char		*path;
+	int			c_player;
+	double		div_cub;
 	t_door		*door;
 	t_door		*tmp_door;
 	t_texture	*textures;
@@ -172,7 +175,7 @@ char		**ft_split(char const *s, char c);
 int			ft_atoi(char *str);
 void		ft_read(char *path, t_map *map);
 int			ft_check_path(t_map *map);
-int			ft_handle_map(t_map *map, int i, int *j, int *c_player);
+int			ft_handle_map(t_map *map, int i, int *j);
 int			skip_lines(t_map *map, int i);
 int			search_way(t_map *map, char *way, int *i, int *j);
 int			skip_spaces(char *str);
@@ -183,7 +186,6 @@ int			cast_rays(t_map *map);
 int			deal_key(t_map *map);
 int			keyrealeased(int key, t_map *map);
 int			check_deal_key(int key, t_map *map);
-int			destroy_notif(void);
 t_pos		castray(t_map *map, double rayangle, int i, int flag);
 double		normalize_angle(double angle);
 t_pos		get_horizontal_intersect(t_map *map, double rayangle);
@@ -213,10 +215,12 @@ void		clean_up(t_map *map);
 char		*ft_trim(char *s1, char c);
 int			ft_valid_line(t_map *map, int *i, int *j);
 int			check_colors(t_map *map, char *way, int *i, int *j);
-int			caracter_exit(t_map *map, int i, int *j, int *c_player);
+int			caracter_exit(t_map *map, int i, int *j);
 int			deal_key(t_map *map);
 void		ft_door(t_map *map);
-int			destroy_notif(void);
+int			destroy_notif(t_map *map);
+int			ft_error_malloc(char *message);
+void		ft_free_map(t_map *map);
 void		render_wall_door(t_map *map, int i, double h, double projectplane);
 void		render_ceiling(t_map *map, int x, double y);
 void		render_floor(t_map *map, int x, double y);

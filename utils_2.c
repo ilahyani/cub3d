@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 22:27:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/02 15:43:48 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/11/02 18:42:43 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ int	check_for_wall(t_map *map, t_pos *pos)
 
 void	game_init(t_map *map)
 {
+	int	i;
+
+	i = 0;
+	while (map->m[i])
+		i++;
+	map->leng_map = i;
 	map->top = 0;
 	map->big_width = 0;
 	map->check = 0;
@@ -51,12 +57,11 @@ void	game_init(t_map *map)
 	map->dy = 0;
 	map->path = "./texture/closed.xpm";
 	map->mlx_ptr = mlx_init();
-	mlx_mouse_hide();
+	// mlx_mouse_hide();
 	map->win_ptr = mlx_new_window(map->mlx_ptr, WIDTH, HEIGHT, "cub3d");
 	map->data.img = mlx_new_image(map->mlx_ptr, WIDTH, HEIGHT);
 	map->data.addr = mlx_get_data_addr(map->data.img,
-			&map->data.bits_per_pixel,
-			&map->data.line_length,
+			&map->data.bits_per_pixel, &map->data.line_length,
 			&map->data.endian);
 }
 
@@ -68,11 +73,14 @@ void	clean_up(t_map *map)
 	while (i < TEXTURES)
 		free(map->textures[i++].path);
 	free(map->textures);
-	// free(map->ray);
+	ft_free_map(map);
+	mlx_destroy_image(map->mlx_ptr, map->data.img);
+	mlx_destroy_window(map->mlx_ptr, map->win_ptr);
 }
 
-int	destroy_notif(void)
+int	destroy_notif(t_map *map)
 {
 	printf("GAME CLOSED\n");
-	exit (0);
+	clean_up(map);
+	exit(0);
 }

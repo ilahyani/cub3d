@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 21:37:41 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/02 12:25:28 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/11/02 18:22:55 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ int	cast_rays(t_map *map)
 
 	fov = 60 * (PI / 180);
 	rayangle = map->pa - (fov / 2);
-		map->ray = NULL;
 	map->ray = (t_dataray *)malloc(sizeof(t_dataray) * WIDTH);
+	if (!map->ray)
+		ft_error_malloc(strerror(ENOMEM));
 	rays = -1;
 	while (++rays < WIDTH)
 	{

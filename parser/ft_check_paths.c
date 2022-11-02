@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 14:30:55 by snouae            #+#    #+#             */
-/*   Updated: 2022/11/01 16:26:22 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/02 18:27:01 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@ int	fill_path_textures(t_map *map, char *way, int *i, int *j)
 
 	path = NULL;
 	tmp = (char *)malloc(sizeof(char) * 2);
+	if (!tmp)
+		ft_error_malloc(strerror(ENOMEM));
 	while (map->m[*i][*j])
 	{
-		tmp[0] = map->m[*i][*j];
+		tmp[0] = map->m[*i][(*j)++];
 		path = ft_strjoin(path, tmp);
-		(*j)++;
 	}
 	path = ft_trim(path, ' ');
+	free(tmp);
 	if (open(path, O_RDONLY) == -1)
 		return (0);
 	if (way[0] == 'N')
@@ -36,7 +38,6 @@ int	fill_path_textures(t_map *map, char *way, int *i, int *j)
 		map->textures[1].path = path;
 	else if (way[0] == 'W')
 		map->textures[2].path = path;
-	free(tmp);
 	return (1);
 }
 
@@ -83,24 +84,23 @@ int	path_exit(t_map *map, char *way)
 {
 	int	i;
 	int	j;
-	int	c_player;
 
 	i = 0;
 	j = 0;
 	map->flags = 0;
 	map->counter = 0;
-	c_player = 0;
+	map->c_player = 0;
 	while (map->m[i])
 	{
 		j = 0;
 		j = skip_spaces(map->m[i]);
 		if (!ft_check_line(map, &i, &j, way))
 			return (0);
-		if (!ft_handle_map(map, i, &j, &c_player))
+		if (!ft_handle_map(map, i, &j))
 			return (0);
 		i++;
 	}
-	if (map->counter != 1)
+	if (map->counter != 1 || (!map->check_c && !map->c_player))
 		return (0);
 	map->check = 0;
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_move_playr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:38:09 by snouae            #+#    #+#             */
-/*   Updated: 2022/11/02 12:27:20 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/11/02 18:11:32 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	deal_key(t_map *map)
 	if (count == 5)
 	{
 		count = 0;
-		map->path = "./texture/main_door.xpm";
+		map->path = "./texture/closed.xpm";
 		map->m[map->dy][map->dx] = 'D';
 		map->dx = 0;
 		map->dy = 0;

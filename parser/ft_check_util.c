@@ -6,36 +6,11 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:23:05 by snouae            #+#    #+#             */
-/*   Updated: 2022/11/01 16:28:19 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/02 17:34:06 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-char	*ft_trim(char *s1, char c)
-{
-	int		i;
-	int		j;
-	int		k;
-	char	*str;
-
-	str = 0;
-	i = 0;
-	j = ft_strlen(s1);
-	while (s1[j - 1] == c && j > 0)
-		j--;
-	str = (char *)malloc((j + 1) * sizeof(char));
-	k = 0;
-	if (str)
-	{
-		while (i < j)
-			str[k++] = s1[i++];
-		str[k] = '\0';
-	}
-	free(s1);
-	s1 = NULL;
-	return (str);
-}
 
 int	ft_valid_line(t_map *map, int *i, int *j)
 {
@@ -51,11 +26,31 @@ int	ft_valid_line(t_map *map, int *i, int *j)
 	return (1);
 }
 
+int	check_rgb(t_map *map, char *way)
+{
+	if (ft_atoi(map->nbr) < 0 || ft_atoi(map->nbr) > 255)
+	{
+		free(map->nbr);
+		return (0);
+	}
+	if (!ft_strcmp("F", way))
+		map->f[map->k++] = ft_atoi(map->nbr);
+	else if (!ft_strcmp("C", way))
+		map->c[map->k++] = ft_atoi(map->nbr);
+	free(map->nbr);
+	map->nbr = NULL;
+	if (map->k > 3)
+		return (0);
+	return (1);
+}
+
 int	fill_rgb(t_map *map, char *way, int *i, int *j)
 {
 	char	*tmp;
 
 	tmp = (char *)malloc(sizeof(char) * 2);
+	if (!tmp)
+		ft_error_malloc(strerror(ENOMEM));
 	tmp[1] = '\0';
 	if (map->m[*i][*j] != ',')
 	{
@@ -65,16 +60,11 @@ int	fill_rgb(t_map *map, char *way, int *i, int *j)
 	if (map->m[*i][*j] && (map->m[*i][*j] == ','
 				|| *j == ft_strlen(map->m[*i]) - 1))
 	{
-		if (ft_atoi(map->nbr) < 0 || ft_atoi(map->nbr) > 255)
+		if (!check_rgb(map, way))
+		{
+			free (tmp);
 			return (0);
-		if (!ft_strcmp("F", way))
-			map->f[map->k++] = ft_atoi(map->nbr);
-		else if (!ft_strcmp("C", way))
-			map->c[map->k++] = ft_atoi(map->nbr);
-		free(map->nbr);
-		map->nbr = NULL;
-		if (map->k > 3)
-			return (0);
+		}
 	}
 	free(tmp);
 	return (1);
@@ -95,7 +85,7 @@ int	check_colors(t_map *map, char *way, int *i, int *j)
 	return (1);
 }
 
-int	caracter_exit(t_map *map, int i, int *j, int *c_player)
+int	caracter_exit(t_map *map, int i, int *j)
 {
 	if (map->m[i][*j] == 'N' || map->m[i][*j] == 'S' || map->m[i][*j] == 'E'
 			|| map->m[i][*j] == 'W')
@@ -104,8 +94,9 @@ int	caracter_exit(t_map *map, int i, int *j, int *c_player)
 		map->px = *j * TILESIZE;
 		map->py = (i - map->top) * TILESIZE;
 		map->m[i][*j] = '0';
-		(*c_player)++;
-		if (*c_player > 1)
+		map->c_player++;
+		map->check_c = 1;
+		if (map->c_player > 1)
 			return (0);
 	}
 	if (map->m[i][*j] != 'D' && map->m[i][*j] != '1' && map->m[i][*j] != '0'

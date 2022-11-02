@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 20:28:41 by snouae            #+#    #+#             */
-/*   Updated: 2022/11/01 16:19:35 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/02 16:27:05 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ char	*ft_strdup(char *s)
 	leng = ft_strlen(s);
 	i = 0;
 	new = (char *)malloc(sizeof(char) * (leng + 1));
+	if (!new)
+		return (NULL);
 	while (s[i])
 	{
 		new[i] = s[i];
