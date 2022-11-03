@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:54:19 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/02 18:01:23 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/03 16:18:53 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,13 @@ void	render3d(t_map *map, int num_rays)
 			h = HEIGHT;
 		y = ((HEIGHT / 2) - (h / 2));
 		render_ceiling(map, i, y);
-		render_wall_door(map, i, h, distanceprojectplane);
+		render_wall(map, i, h, distanceprojectplane);
 		render_floor(map, i, h + y);
 		i++;
 	}
-	ft_mini_map(map);
 }
 
-void	render_wall_door(t_map *map, int i, double h, double projectplane)
+void	render_wall(t_map *map, int i, double h, double projectplane)
 {
 	int		texture_color;
 	double	wall_height;
@@ -49,16 +48,8 @@ void	render_wall_door(t_map *map, int i, double h, double projectplane)
 	while (y < down)
 	{
 		wall_height = ((double)TILESIZE / map->ray[i].distance) * projectplane;
-		if (map->ray[i].type == WALL)
-		{
-			texture_color = get_texture(map, y, i, wall_height);
-			my_mlx_pixel_put(&map->data, i, y, texture_color);
-		}
-		else if (map->ray[i].type == DOOR)
-		{
-			texture_color = get_texture_door(map, y, i, wall_height);
-			my_mlx_pixel_put(&map->data, i, y, texture_color);
-		}
+		texture_color = get_texture(map, y, i, wall_height);
+		my_mlx_pixel_put(&map->data, i, y, texture_color);
 		y++;
 	}
 }

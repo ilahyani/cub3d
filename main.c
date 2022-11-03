@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 09:02:29 by snouae            #+#    #+#             */
-/*   Updated: 2022/11/02 18:43:09 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/02 19:04:41 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	main(int ac, char **av)
 	mlx_loop_hook(map.mlx_ptr, deal_key, &map);
 	mlx_hook(map.win_ptr, 02, (1L << 0), check_deal_key, &map);
 	mlx_hook(map.win_ptr, 03, (1L << 1), keyrealeased, &map);
-	// mlx_hook(map.win_ptr, 06, (1L << 1), mouse_move, &map);
 	mlx_loop(map.mlx_ptr);
 	return (clean_up(&map), 0);
 }

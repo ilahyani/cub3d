@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/02 18:21:56 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/03 00:29:34 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,9 +196,7 @@ void		drawline(t_map *map, double x0, double y0, t_player p);
 void		ft_inti_angl_player(t_map *map);
 void		draw_cub(t_map *map, int i, int j, int color);
 void		render3d(t_map *map, int num_rays);
-void		ft_mini_map(t_map *map);
 double		distance(double x1, double y1, double x2, double y2);
-void		jump(t_map *map, int num_rays);
 int			find_wall_hit(t_pos *pos, t_ray ray, t_map *map);
 int			get_texture(t_map *map, double y, int index, double wallheight);
 void		create_texture(t_map *map);
@@ -217,11 +215,10 @@ int			ft_valid_line(t_map *map, int *i, int *j);
 int			check_colors(t_map *map, char *way, int *i, int *j);
 int			caracter_exit(t_map *map, int i, int *j);
 int			deal_key(t_map *map);
-void		ft_door(t_map *map);
 int			destroy_notif(t_map *map);
 int			ft_error_malloc(char *message);
 void		ft_free_map(t_map *map);
-void		render_wall_door(t_map *map, int i, double h, double projectplane);
+void		render_wall(t_map *map, int i, double h, double projectplane);
 void		render_ceiling(t_map *map, int x, double y);
 void		render_floor(t_map *map, int x, double y);
 int			create_rgb(int r, int g, int b);

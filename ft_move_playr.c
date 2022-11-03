@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:38:09 by snouae            #+#    #+#             */
-/*   Updated: 2022/11/02 18:11:32 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/02 20:44:48 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,7 @@ void	ft_change_angle(t_map *map)
 	}
 }
 
-int	ft_ckeck_door(t_map *map, int count)
-{
-	if (distance(map->px, map->py,
-			map->ray[WIDTH / 2].x, map->ray[WIDTH / 2].y) < 5
-		&& map->m[(int)(map->ray[WIDTH / 2].tmpy / TILESIZE) + map->top]
-		[(int)(map->ray[WIDTH / 2].tmpx / TILESIZE)] == 'D')
-	{
-		map->m[(int)map->ray[WIDTH / 2].tmpy / TILESIZE + map->top]
-		[(int)map->ray[WIDTH / 2].tmpx / TILESIZE] = '0';
-		map->dy = (int)map->ray[WIDTH / 2].tmpy / TILESIZE + map->top;
-		map->dx = (int)map->ray[WIDTH / 2].tmpx / TILESIZE;
-		count++;
-	}
-	return (count);
-}
-
-int	ft_move_w_s(t_map *map, int count)
+int	ft_move_w_s(t_map *map)
 {
 	t_pos	pos;
 
@@ -93,32 +77,18 @@ int	ft_move_w_s(t_map *map, int count)
 			map->py += map->pdy;
 			map->px += map->pdx;
 		}
-		count = ft_ckeck_door(map, count);
 	}
-	return (count);
+	return (0);
 }
 
 int	deal_key(t_map *map)
 {
-	static int	count = 0;
-
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
-	ft_door(map);
 	ft_change_angle(map);
 	map->pdx = cos(map->pa) * 3;
 	map->pdy = sin(map->pa) * 3;
-	count = ft_move_w_s(map, count);
+	ft_move_w_s(map);
 	ft_move_a_b(map);
 	draw_map(map);
-	if (count && (map->key_w == 1 || map->key_s == 1))
-		count++;
-	if (count == 5)
-	{
-		count = 0;
-		map->path = "./texture/closed.xpm";
-		map->m[map->dy][map->dx] = 'D';
-		map->dx = 0;
-		map->dy = 0;
-	}
 	return (0);
 }

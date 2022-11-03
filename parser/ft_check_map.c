@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 14:40:16 by snouae            #+#    #+#             */
-/*   Updated: 2022/11/02 16:25:07 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/02 19:16:02 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,6 @@ int	check_wall_broken(t_map *map, int i, int leng)
 	return (1);
 }
 
-int	check_door(t_map *map, int i, int j)
-{
-	if (i == map->top || i == map->leng_map - 1
-		|| j == 0 || j == ft_strlen(map->m[i]) - 1)
-		return (0);
-	if (!(map->m[i][j + 1] == '1' && map->m[i][j - 1] == '1')
-			&& !(map->m[i + 1][j] == '1' && map->m[i - 1][j]))
-		return (0);
-	return (1);
-}
-
 int	ft_check_map(t_map *map, int i, int *j, int leng)
 {
 	if (map->m[i][*j] == '1')
@@ -82,11 +71,6 @@ int	ft_check_map(t_map *map, int i, int *j, int leng)
 	}
 	if (!check_wall_broken(map, i, leng))
 		return (0);
-	if (map->m[i][*j] == 'D')
-	{
-		if (!check_door(map, i, *j))
-			return (0);
-	}
 	if (map->check == 1)
 		return (0);
 	return (1);

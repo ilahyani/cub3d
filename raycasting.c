@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 21:37:41 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/02 18:22:55 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/02 19:07:27 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,9 @@ int	cast_rays(t_map *map)
 		castray(map, normalize_angle(rayangle), rays, 1);
 		rayangle += fov / WIDTH;
 	}
-	create_texture_door(map, map->path);
 	create_texture(map);
 	render3d(map, rays);
 	free(map->ray);
-	free(map->door_textures);
 	return (0);
 }
 
@@ -59,8 +57,6 @@ t_pos	castray(t_map *map, double rayangle, int i, int flag)
 		map->ray[i].angle = rayangle;
 		map->ray[i].tmpx = pos.tmpx;
 		map->ray[i].tmpy = pos.tmpy;
-		if (map->check_hv == 1)
-			map->ray[i].type = DOOR;
 		if (pos.x == h_pos.x && pos.y == h_pos.y)
 			map->ray[i].direction = 'H';
 		else
@@ -79,14 +75,6 @@ int	find_wall_hit(t_pos *pos, t_ray ray, t_map *map)
 			|| pos->tmpx > map->big_width * TILESIZE
 			|| pos->tmpx < 0)
 			return (0);
-		if (map->m[(int)pos->tmpy / TILESIZE + map->top]
-			[(int)pos->tmpx / TILESIZE] == 'D')
-		{
-			if (ray.direction == 'H')
-				map->check_h = 1;
-			else
-				map->check_v = 1;
-		}
 		if (check_for_wall(map, pos))
 			return (0);
 		ray.xintercept += ray.xstep;
