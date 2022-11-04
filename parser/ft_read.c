@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 14:25:10 by snouae            #+#    #+#             */
-/*   Updated: 2022/11/02 17:34:12 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/04 14:36:00 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ void	ft_read(char *path, t_map *map)
 	buf = NULL;
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
+	{
+		printf("Map Does Not Exist. Try again!\n");
 		exit(1);
+	}
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -30,7 +33,7 @@ void	ft_read(char *path, t_map *map)
 			line[0] = ' ';
 			line[1] = '\n';
 			line[2] = '\0';
-		}		
+		}
 		buf = ft_strjoin(buf, line);
 		free(line);
 		line = get_next_line(fd);
@@ -50,7 +53,7 @@ char	*ft_trim(char *s1, char c)
 	str = 0;
 	i = 0;
 	j = ft_strlen(s1);
-	while (s1[j - 1] == c && j > 0)
+	while (j > 0 && s1[j - 1] == c)
 		j--;
 	str = (char *)malloc((j + 1) * sizeof(char));
 	if (!str)

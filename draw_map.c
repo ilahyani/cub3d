@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:57:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/03 16:18:38 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/03 17:32:30 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	{	
 		pixel = data->addr
 			+ (y * data->line_length + x * (data->bits_per_pixel / 8));
-		*(unsigned int *) pixel = color;
+		*(int *) pixel = color;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:54:19 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/03 16:10:39 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/04 01:55:36 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	render3d(t_map *map, int num_rays)
 		if (map->ray[i].distance == 0)
 			map->ray[i].distance = 0.000001;
 		distanceprojectplane = ((WIDTH) / 2) / fabs(tan(M_PI / 6));
-		h = ((double)TILESIZE / map->ray[i].distance) * distanceprojectplane;
+		h = (TILESIZE / map->ray[i].distance) * distanceprojectplane;
 		if (h > HEIGHT)
 			h = HEIGHT;
 		y = ((HEIGHT / 2) - (h / 2));

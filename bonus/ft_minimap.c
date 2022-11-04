@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 12:19:53 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/02 18:21:56 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/04 02:43:27 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void	ft_mini_map(t_map *map)
 	j = 0;
 	x = MINIMAP / 2;
 	y = (MINIMAP + 1) / 2;
-	map->div_cub = floor(MINIMAP / CUBMAP);
+	map->div_cub = (int)(MINIMAP / CUBMAP);
 	draw_player(map, x, y);
 	while (j < MINIMAP)
 	{
-		my_mlx_pixel_put(&map->data, j, MINIMAP, 0x000000);
 		my_mlx_pixel_put(&map->data, MINIMAP, j, 0x000000);
+		my_mlx_pixel_put(&map->data, j, MINIMAP, 0x000000);
 		j++;
 	}
 	my_mlx_pixel_put(&map->data, j, MINIMAP, 0x0000FF);

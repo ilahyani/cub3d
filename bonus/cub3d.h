@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/02 18:21:56 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/03 17:17:20 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define JUMP_SPEED 20
 # define CUBMAP 15
 # define PI 3.14159
-# define TILESIZE 16
+# define TILESIZE 15
 # define WALL_WIDTH 1
 # define BUFFER_SIZE 1
 # define W 13
