@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 21:37:41 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/04 00:33:29 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/06 04:29:22 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	cast_rays(t_map *map)
 	create_texture_door(map, map->path);
 	create_texture(map);
 	render3d(map, rays);
-	free(map->ray);
 	free(map->door_textures);
 	return (0);
 }
@@ -74,9 +73,10 @@ int	find_wall_hit(t_pos *pos, t_ray ray, t_map *map)
 	while (69)
 	{
 		set_pos(pos, ray);
-		if (pos->tmpy > (map->rows - 1) * TILESIZE
+		if ((pos->tmpy / TILESIZE) > (map->rows - 1)
 			|| pos->tmpy < 0
-			|| pos->tmpx > map->big_width * TILESIZE
+			|| pos->tmpx > (ft_strlen(map->m[(int)(pos->tmpy / TILESIZE)
+					+ map->top]) - 1) * TILESIZE
 			|| pos->tmpx < 0)
 			return (0);
 		if (map->m[(int)pos->tmpy / TILESIZE + map->top]

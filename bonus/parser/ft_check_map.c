@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 14:40:16 by snouae            #+#    #+#             */
-/*   Updated: 2022/11/04 02:39:14 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/06 14:48:46 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	check_walls(t_map *map, int i, int *j)
 int	check_wall_broken(t_map *map, int i, int leng)
 {
 	int	k;
-			
+
 	if (leng > ft_strlen(map->m[i]))
 	{
 		k = ft_strlen(map->m[i]);

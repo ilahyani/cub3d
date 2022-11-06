@@ -6,11 +6,17 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 14:25:10 by snouae            #+#    #+#             */
-/*   Updated: 2022/11/04 14:35:23 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/06 14:43:03 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	error_file(void)
+{
+	printf("Map Does Not Exist. Try again!\n");
+	exit(1);
+}
 
 void	ft_read(char *path, t_map *map)
 {
@@ -21,23 +27,20 @@ void	ft_read(char *path, t_map *map)
 	buf = NULL;
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-	{
-		printf("Map Does Not Exist. Try again!\n");
-		exit(1);
-	}
+		error_file();
 	line = get_next_line(fd);
 	while (line)
 	{
 		if (line[0] == '\n')
 		{
-			line[0] = ' ';
-			line[1] = '\n';
-			line[2] = '\0';
-		}		
+			free(line);
+			line = ft_strdup(" \n");
+		}
 		buf = ft_strjoin(buf, line);
 		free(line);
 		line = get_next_line(fd);
 	}
+	free(line);
 	map->m = ft_split(buf, '\n');
 	free(buf);
 	close(fd);
@@ -68,4 +71,16 @@ char	*ft_trim(char *s1, char c)
 	free(s1);
 	s1 = NULL;
 	return (str);
+}
+
+void	fill_directions(t_map *map, char *way, char *path)
+{
+	if (way[0] == 'N')
+		map->textures[3].path = path;
+	else if (way[0] == 'S')
+		map->textures[0].path = path;
+	else if (way[0] == 'E')
+		map->textures[1].path = path;
+	else if (way[0] == 'W')
+		map->textures[2].path = path;
 }

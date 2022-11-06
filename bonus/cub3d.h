@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 11:47:34 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/03 17:17:20 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/06 04:58:17 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,5 +228,6 @@ int			create_rgb(int r, int g, int b);
 void		draw_cub(t_map *map, int i, int j, int color);
 void		draw_player(t_map *map, double x, double y);
 void		draw_minimap(t_map *map, double dx, double dy);
+void		fill_directions(t_map *map, char *way, char *path);
 
 #endif
