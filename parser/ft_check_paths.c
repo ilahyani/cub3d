@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_paths.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 14:30:55 by snouae            #+#    #+#             */
-/*   Updated: 2022/11/02 18:27:01 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/05 16:43:45 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	fill_path_textures(t_map *map, char *way, int *i, int *j)
 
 	path = NULL;
 	tmp = (char *)malloc(sizeof(char) * 2);
+	tmp[1] = '\0';
 	if (!tmp)
 		ft_error_malloc(strerror(ENOMEM));
 	while (map->m[*i][*j])

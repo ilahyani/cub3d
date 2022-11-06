@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: snouae <snouae@student.42.fr>              +#+  +:+       +#+         #
+#    By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 17:52:47 by snouae            #+#    #+#              #
-#    Updated: 2022/11/02 20:38:58 by snouae           ###   ########.fr        #
+#    Updated: 2022/11/05 22:09:37 by ilahyani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ SRC_BONUS = bonus/main.c\
 
 OBJ_BONUS= $(SRC_BONUS:.c=.o)
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 MLXFLAGS = -framework OpenGL -framework Appkit
 RM = rm  -rf
 NAME_BONUS = CUB3D_BONUS

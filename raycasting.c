@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 21:37:41 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/02 19:07:27 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/06 00:51:29 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	cast_rays(t_map *map)
 
 	fov = 60 * (PI / 180);
 	rayangle = map->pa - (fov / 2);
-	map->ray = (t_dataray *)malloc(sizeof(t_dataray) * WIDTH);
+	map->ray = (t_dataray *)malloc(sizeof(t_dataray) * WIDTH + 1);
 	if (!map->ray)
 		ft_error_malloc(strerror(ENOMEM));
 	rays = -1;
@@ -35,7 +35,7 @@ int	cast_rays(t_map *map)
 	}
 	create_texture(map);
 	render3d(map, rays);
-	free(map->ray);
+	// free(map->ray);
 	return (0);
 }
 
@@ -65,14 +65,22 @@ t_pos	castray(t_map *map, double rayangle, int i, int flag)
 	return (pos);
 }
 
+int	get_x(int y, t_map *map)
+{
+	
+	int x = ft_strlen(map->m[y]) - 1;
+	// printf("x %d\n", x);
+	return (x);
+}
+
 int	find_wall_hit(t_pos *pos, t_ray ray, t_map *map)
 {
 	while (69)
 	{
 		set_pos(pos, ray);
-		if (pos->tmpy > (map->rows - 1) * TILESIZE
-			|| pos->tmpy < 0
-			|| pos->tmpx > map->big_width * TILESIZE
+		if ((pos->tmpy / TILESIZE) > (map->rows - 1)
+			|| pos->tmpy < 0 
+			|| pos->tmpx > get_x((pos->tmpy / TILESIZE) + map->top, map) * TILESIZE
 			|| pos->tmpx < 0)
 			return (0);
 		if (check_for_wall(map, pos))

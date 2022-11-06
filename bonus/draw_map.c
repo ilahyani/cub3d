@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:57:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/03 15:32:23 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/05 23:06:03 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ void	ft_inti_angl_player(t_map *map)
 void	draw_map(t_map *map)
 {
 	cast_rays(map);
+	free(map->ray);
 	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->data.img, 0, 0);
 }

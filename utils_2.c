@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 22:27:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/02 19:07:56 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/06 00:53:11 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	set_pos(t_pos *pos, t_ray ray)
 
 int	check_for_wall(t_map *map, t_pos *pos)
 {
-	if (map->m[(int)pos->tmpy / TILESIZE + map->top]
-		[(int)pos->tmpx / TILESIZE] == '1'
-		|| map->m[(int)pos->tmpy / TILESIZE + map->top]
-		[(int)pos->tmpx / TILESIZE] != '0')
+	if ((map->m[(int)pos->tmpy / TILESIZE + map->top]
+			[(int)pos->tmpx / TILESIZE] == '1'
+			|| map->m[(int)pos->tmpy / TILESIZE + map->top]
+			[(int)pos->tmpx / TILESIZE] != '0'))
 		return (1);
 	return (0);
 }

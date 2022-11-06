@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:53:28 by snouae            #+#    #+#             */
-/*   Updated: 2022/10/20 18:24:38 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/06 00:14:04 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,3 @@ char	**ft_split(char const *s, char c)
 		return (0);
 	return (ft_rem(s, tab, c, i));
 }
-/*#include <stdio.h>
-int main()
-{
-    char *str = "HELLO WORLD";w
-    char **split = ft_split(str, ' ');
-    int i = count_str(str, ' ');
-    int n = 0;
-    printf("%d\n",i);
-    while (i > n)
-    printf("-->%s\n", split[n++]);
-}*/

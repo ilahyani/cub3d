@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_read.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 14:25:10 by snouae            #+#    #+#             */
-/*   Updated: 2022/11/04 14:36:00 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/05 23:30:12 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,21 @@ void	ft_read(char *path, t_map *map)
 	{
 		if (line[0] == '\n')
 		{
-			line[0] = ' ';
-			line[1] = '\n';
-			line[2] = '\0';
+			// line[0] = ' ';
+			// line[1] = '\n';
+			// line[2] = '\0';
+			free(line);
+			line = ft_strdup(" \n");
 		}
 		buf = ft_strjoin(buf, line);
 		free(line);
 		line = get_next_line(fd);
 	}
+	free(line);
 	map->m = ft_split(buf, '\n');
+	// for (int i = 0; map->m[i] != NULL; i++) {
+	// 	printf("%s\n", map->m[i]);
+	// }
 	free(buf);
 	close(fd);
 }
