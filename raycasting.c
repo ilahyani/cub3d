@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 21:37:41 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/11/06 00:51:29 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/11/06 04:27:44 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	cast_rays(t_map *map)
 	}
 	create_texture(map);
 	render3d(map, rays);
-	// free(map->ray);
 	return (0);
 }
 
@@ -65,22 +64,15 @@ t_pos	castray(t_map *map, double rayangle, int i, int flag)
 	return (pos);
 }
 
-int	get_x(int y, t_map *map)
-{
-	
-	int x = ft_strlen(map->m[y]) - 1;
-	// printf("x %d\n", x);
-	return (x);
-}
-
 int	find_wall_hit(t_pos *pos, t_ray ray, t_map *map)
 {
 	while (69)
 	{
 		set_pos(pos, ray);
 		if ((pos->tmpy / TILESIZE) > (map->rows - 1)
-			|| pos->tmpy < 0 
-			|| pos->tmpx > get_x((pos->tmpy / TILESIZE) + map->top, map) * TILESIZE
+			|| pos->tmpy < 0
+			|| pos->tmpx > (ft_strlen(map->m[(int)(pos->tmpy / TILESIZE)
+					+ map->top]) - 1) * TILESIZE
 			|| pos->tmpx < 0)
 			return (0);
 		if (check_for_wall(map, pos))

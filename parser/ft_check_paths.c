@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_paths.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 14:30:55 by snouae            #+#    #+#             */
-/*   Updated: 2022/11/05 16:43:45 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/11/06 14:37:15 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,7 @@ int	fill_path_textures(t_map *map, char *way, int *i, int *j)
 	free(tmp);
 	if (open(path, O_RDONLY) == -1)
 		return (0);
-	if (way[0] == 'N')
-		map->textures[3].path = path;
-	else if (way[0] == 'S')
-		map->textures[0].path = path;
-	else if (way[0] == 'E')
-		map->textures[1].path = path;
-	else if (way[0] == 'W')
-		map->textures[2].path = path;
+	fill_directions(map, way, path);
 	return (1);
 }
 

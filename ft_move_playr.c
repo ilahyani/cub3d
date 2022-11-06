@@ -6,7 +6,7 @@
 /*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:38:09 by snouae            #+#    #+#             */
-/*   Updated: 2022/11/02 20:44:48 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/06 03:57:17 by snouae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int	deal_key(t_map *map)
 	map->pdx = cos(map->pa) * 3;
 	map->pdy = sin(map->pa) * 3;
 	ft_move_w_s(map);
+	free(map->ray);
 	ft_move_a_b(map);
 	draw_map(map);
 	return (0);

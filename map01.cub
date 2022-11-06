@@ -4,7 +4,7 @@ SO    ./texture/BRICK_4C.xpm
 
 EA ./texture/BRICK_4D.xpm   
 
-WE        ./texture/BRICK_4E.xpm  
+WE ./texture/BRICK_4E.xpm  
 F 55      ,  11 ,  200
 C 225  , 30 , 35 
 11111111111111
