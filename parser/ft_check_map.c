@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snouae <snouae@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 14:40:16 by snouae            #+#    #+#             */
-/*   Updated: 2022/11/02 19:16:02 by snouae           ###   ########.fr       */
+/*   Updated: 2022/11/06 20:38:10 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	ft_handle_map(t_map *map, int i, int *j)
 {
 	int	leng;
 
+	leng = 0;
 	if (map->top && i >= map->top)
 	{
 		if (map->big_width < ft_strlen(map->m[i]))
